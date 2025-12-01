@@ -1,59 +1,197 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# BSU-Bokod Student Information Management System (SIMS)
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A comprehensive web-based student information management system built for Benguet State University - Bokod Campus using Laravel 11 and modern web technologies.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 🎓 Academic Management
+- **Student Records Management** - Complete student information with photo uploads
+- **Program & Department Management** - Organize students by programs and departments
+- **Subject Management** - Auto-sync subjects with their respective programs
+- **4-Year Program Structure** - Support for 1st to 4th year academic progression
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 📊 Grade Management
+- **Grade Import Workflow** - Import grades from CSV/Excel files
+- **Grade Approval System** - Admin-only approval workflow for grades
+- **GPA Calculation** - Automatic GPA computation with configurable grading scales
+- **Academic Standing** - Track student performance (Good Standing, Warning, Probation, Dismissed)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 🔄 Academic Progression
+- **Semester Transition** - Automated semester-to-semester student progression
+- **Academic Year Management** - Manage active and archived academic years
+- **Standing Calculation** - Automatic academic standing updates based on GPA
 
-## Learning Laravel
+### 📦 Archive System
+- **Student Archiving** - Create snapshots of student data by school year/semester
+- **Historical Records** - Maintain permanent records for compliance and audits
+- **Restore Functionality** - Restore archived students when needed
+- **Collapsible UI** - Clean, modern interface with toggleable information cards
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### 🔐 Security & Administration
+- **Role-Based Access** - Admin and User roles with appropriate permissions
+- **Activity Logging** - Track all system actions with user attribution
+- **Grade Approval** - Restrict grade approval to administrators only
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 🎨 Modern UI/UX
+- **Green Design System** - Custom green-themed color palette
+- **Responsive Design** - Mobile-friendly interface
+- **Smooth Animations** - CSS transitions and Alpine.js interactivity
+- **Tab Navigation** - Active tab highlighting with animated underlines
 
-## Laravel Sponsors
+## Tech Stack
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **Framework**: Laravel 11
+- **Frontend**: 
+  - Blade Templates
+  - Tailwind CSS
+  - Alpine.js
+  - Vite
+- **Database**: MySQL/MariaDB
+- **Authentication**: Laravel Breeze
+- **Notifications**: Toastify.js
 
-### Premium Partners
+## Installation
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### Prerequisites
+- PHP 8.2 or higher
+- Composer
+- Node.js & npm
+- MySQL/MariaDB
+
+### Setup Instructions
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/secre159/bsu-sims.git
+   cd bsu-sims
+   ```
+
+2. **Install PHP dependencies**
+   ```bash
+   composer install
+   ```
+
+3. **Install Node dependencies**
+   ```bash
+   npm install
+   ```
+
+4. **Environment configuration**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+5. **Configure your database**
+   Edit `.env` file with your database credentials:
+   ```
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=bsu_sims
+   DB_USERNAME=your_username
+   DB_PASSWORD=your_password
+   ```
+
+6. **Run migrations and seeders**
+   ```bash
+   php artisan migrate --seed
+   ```
+
+7. **Create storage link**
+   ```bash
+   php artisan storage:link
+   ```
+
+8. **Build assets**
+   ```bash
+   npm run build
+   ```
+
+9. **Start the development server**
+   ```bash
+   php artisan serve
+   ```
+
+10. **Access the application**
+    - Open your browser and navigate to `http://localhost:8000`
+    - Default admin credentials (if seeded):
+      - Email: admin@bsu.edu.ph
+      - Password: password
+
+## Usage
+
+### Grade Import
+1. Navigate to **Grade Approvals**
+2. Click **Import Grades**
+3. Download the CSV template
+4. Fill in student grades following the template format
+5. Upload the completed CSV file
+6. Review imported grades
+7. Submit for approval (Admin only)
+
+### Semester Transition
+1. Go to **Academic Years**
+2. Select the active academic year
+3. Click **Semester Transition**
+4. Choose target semester
+5. Review transition preview
+6. Execute transition to promote students
+
+### Archive Students
+1. Navigate to **Archives**
+2. Click **Archive School Year**
+3. Review current student statistics
+4. Enter school year and semester
+5. Optionally add archive reason
+6. Choose whether to delete students after archiving
+7. Create archive
+
+## Project Structure
+
+```
+bsu-sims/
+├── app/
+│   ├── Http/Controllers/    # Application controllers
+│   ├── Models/              # Eloquent models
+│   └── Services/            # Business logic services
+├── database/
+│   ├── migrations/          # Database migrations
+│   └── seeders/            # Database seeders
+├── resources/
+│   ├── css/                # Custom styles
+│   ├── js/                 # JavaScript files
+│   └── views/              # Blade templates
+├── routes/
+│   └── web.php             # Web routes
+└── public/
+    └── build/              # Compiled assets
+```
+
+## Key Services
+
+- **GpaCalculationService** - Handles GPA computation and grading scale management
+- **AcademicStandingService** - Calculates and updates student academic standings
+- **SemesterTransitionService** - Manages semester-to-semester student progression
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+This is an internal project for BSU-Bokod. If you'd like to contribute:
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is proprietary software developed for Benguet State University - Bokod Campus.
+
+## Contact
+
+For questions or support, please contact the BSU-Bokod IT Department.
+
+---
+
+**Developed for Benguet State University - Bokod Campus**
