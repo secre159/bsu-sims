@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('students', function (Blueprint $table) {
+            // Add only if columns don't exist
+            if (!Schema::hasColumn('students', 'gwa')) {
+                $table->decimal('gwa', 3, 2)->nullable()->comment('Grade Weighted Average');
+            }
+            if (!Schema::hasColumn('students', 'is_irregular')) {
+                $table->boolean('is_irregular')->default(false);
+            }
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('students', function (Blueprint $table) {
+            if (Schema::hasColumn('students', 'gwa')) {
+                $table->dropColumn('gwa');
+            }
+            if (Schema::hasColumn('students', 'is_irregular')) {
+                $table->dropColumn('is_irregular');
+            }
+        });
+    }
+};
