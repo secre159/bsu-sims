@@ -195,7 +195,7 @@ class SampleStudentsSeeder extends Seeder
             $program = $programs[$index % $programs->count()];
             
             $studentData['program_id'] = $program->id;
-            $studentData['date_of_birth'] = now()->subYears(18 + rand(0, 5))->subMonths(rand(0, 11))->format('Y-m-d');
+            $studentData['birthdate'] = now()->subYears(18 + rand(0, 5))->subMonths(rand(0, 11))->format('Y-m-d');
             $studentData['address'] = 'Bokod, Benguet';
             $studentData['gender'] = rand(0, 1) ? 'Male' : 'Female';
             
