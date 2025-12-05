@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install PHP extensions
-RUN docker-php-ext-install pdo pdo_pgsql mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install pdo pdo_pgsql mbstring exif pcntl bcmath gd zip
 
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -28,8 +28,8 @@ WORKDIR /app
 # Copy application files
 COPY . .
 
-# Install dependencies
-RUN composer install --no-dev --optimize-autoloader --no-interaction
+# Install dependencies (ignore platform requirements for compatibility)
+RUN composer install --no-dev --optimize-autoloader --no-interaction --ignore-platform-req=php-64bit --ignore-platform-req=ext-zip
 
 # Install Node dependencies and build assets
 RUN npm ci && npm run build
