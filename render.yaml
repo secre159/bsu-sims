@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: bsu-sims
+    runtime: php
+    buildCommand: bash render-build.sh
+    startCommand: bash render-start.sh
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        generateValue: true
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: SESSION_DRIVER
+        value: database
+      - key: CACHE_DRIVER
+        value: database
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: DB_CONNECTION
+        value: mysql
+      - key: DATABASE_URL
+        fromDatabase:
+          name: bsu-sims-db
+          property: connectionString
+
+databases:
+  - name: bsu-sims-db
+    databaseName: bsu_sims
+    user: bsu_sims_user
