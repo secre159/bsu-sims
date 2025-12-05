@@ -28,15 +28,32 @@ class StudentDashboardController extends Controller
         $allEnrollments = $student->enrollments()
             ->with(['subject', 'academicYear'])
             ->whereIn('status', ['Enrolled', 'Completed', 'Failed'])
-            ->orderBy('academic_year_id', 'desc')
             ->get();
 
-        // Group by semester
-        $enrollmentsBySemester = $allEnrollments->groupBy(function ($enrollment) {
-            if ($enrollment->academicYear) {
-                return $enrollment->academicYear->year_code . ' - ' . $enrollment->academicYear->semester;
-            }
-            return 'No Academic Year';
+        // Sort by academic year code (chronological order) descending
+        $allEnrollments = $allEnrollments->sortByDesc(function ($enrollment) {
+            return $enrollment->academicYear->year_code ?? '';
+        });
+
+        // Group by year level first, then by semester
+        $enrollmentsByYearLevel = $allEnrollments->groupBy(function ($enrollment) {
+            return $enrollment->subject->year_level ?? 'Unknown';
+        });
+
+        // Sort year levels (1st Year, 2nd Year, etc.) in descending order
+        $yearLevelOrder = ['5th Year', '4th Year', '3rd Year', '2nd Year', '1st Year'];
+        $enrollmentsByYearLevel = $enrollmentsByYearLevel->sortBy(function ($items, $yearLevel) use ($yearLevelOrder) {
+            return array_search($yearLevel, $yearLevelOrder);
+        });
+
+        // Within each year level, group by semester
+        $enrollmentsByYearLevel = $enrollmentsByYearLevel->map(function ($yearLevelEnrollments) {
+            return $yearLevelEnrollments->groupBy(function ($enrollment) {
+                if ($enrollment->academicYear) {
+                    return $enrollment->academicYear->year_code . ' - ' . $enrollment->academicYear->semester;
+                }
+                return 'No Academic Year';
+            });
         });
 
         // Get all completed enrollments
@@ -75,7 +92,7 @@ class StudentDashboardController extends Controller
             'student',
             'currentEnrollments',
             'completedCourses',
-            'enrollmentsBySemester',
+            'enrollmentsByYearLevel',
             'overallGwa',
             'currentSemesterGwa',
             'totalUnits',

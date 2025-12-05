@@ -1,0 +1,315 @@
+Code,Name,Description,Units,Program Code,Year Level,Semester,Prerequisites
+GE101,Understanding the Self,Self-awareness and development,3,BIT,1st Year,1st Semester,
+GE102,Readings in Philippine History,Philippine historical development,3,BIT,1st Year,1st Semester,
+MATH101,Mathematics in the Modern World,Mathematical concepts and applications,3,BIT,1st Year,1st Semester,
+ENG101,Purposive Communication,Effective communication skills,3,BIT,1st Year,1st Semester,
+PE101,Physical Fitness,Physical education and wellness,2,BIT,1st Year,1st Semester,
+NSTP101,NSTP 1,National service training,3,BIT,1st Year,1st Semester,
+GE103,The Contemporary World,Global issues and perspectives,3,BIT,1st Year,2nd Semester,
+FIL101,Kontekstwalisadong Komunikasyon,Filipino communication,3,BIT,1st Year,2nd Semester,
+SCI101,Science Technology and Society,Scientific literacy,3,BIT,1st Year,2nd Semester,
+IT101,Introduction to Industrial Technology,Overview of industrial processes,3,BIT,1st Year,2nd Semester,
+PE102,Rhythmic Activities,Dance and movement,2,BIT,1st Year,2nd Semester,PE101
+NSTP102,NSTP 2,Community service,3,BIT,1st Year,2nd Semester,NSTP101
+GE104,Ethics,Moral philosophy and decision making,3,BIT,2nd Year,1st Semester,
+IT201,Industrial Safety and Health,Workplace safety practices,3,BIT,2nd Year,1st Semester,
+IT202,Quality Control and Assurance,Quality management systems,3,BIT,2nd Year,1st Semester,
+IT203,Industrial Materials,Properties of industrial materials,3,BIT,2nd Year,1st Semester,
+PE103,Individual and Dual Sports,Sports and athletics,2,BIT,2nd Year,1st Semester,PE102
+RES101,Research Methods,Basic research methodology,3,BIT,2nd Year,1st Semester,
+GE105,Art Appreciation,Understanding visual arts,3,BIT,2nd Year,2nd Semester,
+IT204,Industrial Processes,Manufacturing processes,3,BIT,2nd Year,2nd Semester,IT203
+IT205,Tool and Die Making,Precision tooling,3,BIT,2nd Year,2nd Semester,IT203
+IT206,Machine Shop Practice,Machine operation,3,BIT,2nd Year,2nd Semester,IT203
+PE104,Team Sports,Team-based athletics,2,BIT,2nd Year,2nd Semester,PE103
+GE201,Life and Works of Rizal,Philippine national hero,3,BIT,3rd Year,1st Semester,
+IT301,Industrial Automation,Automated systems,3,BIT,3rd Year,1st Semester,IT204
+IT302,Computer-Aided Design,CAD software and applications,3,BIT,3rd Year,1st Semester,IT204
+IT303,Welding Technology,Welding techniques and safety,3,BIT,3rd Year,1st Semester,IT206
+IT304,Practicum 1,On-the-job training,6,BIT,3rd Year,1st Semester,"IT204,IT205,IT206"
+IT401,Entrepreneurship,Business fundamentals,3,BIT,3rd Year,2nd Semester,
+IT402,Capstone Project,Final project,6,BIT,3rd Year,2nd Semester,"IT301,IT302,IT303"
+CS101,Introduction to Computing,Computing fundamentals,3,BSIT,1st Year,1st Semester,
+MATH101,Calculus 1,Differential calculus,3,BSIT,1st Year,1st Semester,
+ENG101,Purposive Communication,Communication skills,3,BSIT,1st Year,1st Semester,
+GE101,Understanding the Self,Self-awareness,3,BSIT,1st Year,1st Semester,
+PE101,Physical Fitness,Physical education,2,BSIT,1st Year,1st Semester,
+NSTP101,NSTP 1,National service training,3,BSIT,1st Year,1st Semester,
+CS102,Computer Programming 1,Programming fundamentals,3,BSIT,1st Year,2nd Semester,CS101
+MATH102,Calculus 2,Integral calculus,3,BSIT,1st Year,2nd Semester,MATH101
+FIL101,Komunikasyon sa Filipino,Filipino communication,3,BSIT,1st Year,2nd Semester,
+GE102,Readings in Philippine History,Philippine history,3,BSIT,1st Year,2nd Semester,
+PE102,Rhythmic Activities,Dance and fitness,2,BSIT,1st Year,2nd Semester,PE101
+NSTP102,NSTP 2,Community service,3,BSIT,1st Year,2nd Semester,NSTP101
+CS201,Computer Programming 2,Object-oriented programming,3,BSIT,2nd Year,1st Semester,CS102
+CS202,Data Structures and Algorithms,Data structures,3,BSIT,2nd Year,1st Semester,CS102
+CS203,Discrete Mathematics,Mathematical structures,3,BSIT,2nd Year,1st Semester,MATH102
+GE103,The Contemporary World,Global perspectives,3,BSIT,2nd Year,1st Semester,
+PE103,Individual Sports,Athletics,2,BSIT,2nd Year,1st Semester,PE102
+CS204,Database Management Systems,Database design and SQL,3,BSIT,2nd Year,2nd Semester,CS202
+CS205,Web Development,Web technologies,3,BSIT,2nd Year,2nd Semester,CS201
+CS206,Information Management,Information systems,3,BSIT,2nd Year,2nd Semester,CS204
+GE104,Ethics,Moral philosophy,3,BSIT,2nd Year,2nd Semester,
+PE104,Team Sports,Team athletics,2,BSIT,2nd Year,2nd Semester,PE103
+CS301,Software Engineering,SDLC and methodologies,3,BSIT,3rd Year,1st Semester,"CS201,CS204"
+CS302,Operating Systems,OS concepts and management,3,BSIT,3rd Year,1st Semester,CS202
+CS303,Computer Networks,Networking fundamentals,3,BSIT,3rd Year,1st Semester,CS202
+GE105,Art Appreciation,Visual arts,3,BSIT,3rd Year,1st Semester,
+GE201,Life and Works of Rizal,Rizal's legacy,3,BSIT,3rd Year,1st Semester,
+CS304,System Analysis and Design,Systems development,3,BSIT,3rd Year,2nd Semester,CS301
+CS305,Human Computer Interaction,UI/UX design,3,BSIT,3rd Year,2nd Semester,CS301
+CS306,Mobile Application Development,Mobile app programming,3,BSIT,3rd Year,2nd Semester,CS205
+RES101,Research Methods,Research fundamentals,3,BSIT,3rd Year,2nd Semester,
+CS401,Capstone Project 1,Project development,3,BSIT,4th Year,1st Semester,"CS301,CS304"
+CS402,IT Practicum,Industry immersion,6,BSIT,4th Year,1st Semester,"CS301,CS304"
+CS403,Information Assurance and Security,Cybersecurity,3,BSIT,4th Year,1st Semester,CS303
+CS404,Capstone Project 2,Project completion,3,BSIT,4th Year,2nd Semester,CS401
+ENT101,Fundamentals of Entrepreneurship,Entrepreneurship basics,3,BSEntrep,1st Year,1st Semester,
+MATH101,Mathematics in Business,Business mathematics,3,BSEntrep,1st Year,1st Semester,
+ENG101,Purposive Communication,Communication skills,3,BSEntrep,1st Year,1st Semester,
+GE101,Understanding the Self,Self-development,3,BSEntrep,1st Year,1st Semester,
+PE101,Physical Fitness,Physical education,2,BSEntrep,1st Year,1st Semester,
+NSTP101,NSTP 1,National service,3,BSEntrep,1st Year,1st Semester,
+ENT102,Business Planning,Business plan development,3,BSEntrep,1st Year,2nd Semester,ENT101
+ACC101,Financial Accounting,Accounting fundamentals,3,BSEntrep,1st Year,2nd Semester,
+FIL101,Komunikasyon sa Filipino,Filipino communication,3,BSEntrep,1st Year,2nd Semester,
+GE102,Readings in Philippine History,Philippine history,3,BSEntrep,1st Year,2nd Semester,
+PE102,Rhythmic Activities,Dance and fitness,2,BSEntrep,1st Year,2nd Semester,PE101
+NSTP102,NSTP 2,Community service,3,BSEntrep,1st Year,2nd Semester,NSTP101
+ENT201,Marketing Management,Marketing strategies,3,BSEntrep,2nd Year,1st Semester,ENT102
+ENT202,Operations Management,Business operations,3,BSEntrep,2nd Year,1st Semester,ENT102
+MGT101,Principles of Management,Management basics,3,BSEntrep,2nd Year,1st Semester,
+GE103,The Contemporary World,Global issues,3,BSEntrep,2nd Year,1st Semester,
+PE103,Individual Sports,Athletics,2,BSEntrep,2nd Year,1st Semester,PE102
+ENT203,Financial Management,Financial planning,3,BSEntrep,2nd Year,2nd Semester,"ACC101,ENT201"
+ENT204,Human Resource Management,HR practices,3,BSEntrep,2nd Year,2nd Semester,MGT101
+ECO101,Microeconomics,Economic principles,3,BSEntrep,2nd Year,2nd Semester,
+GE104,Ethics,Moral philosophy,3,BSEntrep,2nd Year,2nd Semester,
+PE104,Team Sports,Team athletics,2,BSEntrep,2nd Year,2nd Semester,PE103
+ENT301,Business Law,Legal aspects of business,3,BSEntrep,3rd Year,1st Semester,
+ENT302,Social Entrepreneurship,Social enterprise,3,BSEntrep,3rd Year,1st Semester,ENT201
+ENT303,Innovation and Technology Management,Tech entrepreneurship,3,BSEntrep,3rd Year,1st Semester,ENT202
+GE105,Art Appreciation,Visual arts,3,BSEntrep,3rd Year,1st Semester,
+GE201,Life and Works of Rizal,Rizal's legacy,3,BSEntrep,3rd Year,1st Semester,
+ENT304,Entrepreneurial Marketing,Marketing for startups,3,BSEntrep,3rd Year,2nd Semester,"ENT201,ENT302"
+ENT305,Business Research,Research methods,3,BSEntrep,3rd Year,2nd Semester,
+ENT306,Business Internship,Practical training,6,BSEntrep,3rd Year,2nd Semester,"ENT201,ENT202,ENT203"
+ENT401,Feasibility Study,Business feasibility,3,BSEntrep,4th Year,1st Semester,"ENT305,ENT306"
+ENT402,Business Capstone Project,Final business plan,6,BSEntrep,4th Year,2nd Semester,ENT401
+PA101,Introduction to Public Administration,Public admin fundamentals,3,BPA,1st Year,1st Semester,
+POLSCI101,Philippine Government and Constitution,Philippine governance,3,BPA,1st Year,1st Semester,
+ENG101,Purposive Communication,Communication skills,3,BPA,1st Year,1st Semester,
+GE101,Understanding the Self,Self-awareness,3,BPA,1st Year,1st Semester,
+PE101,Physical Fitness,Physical education,2,BPA,1st Year,1st Semester,
+NSTP101,NSTP 1,National service,3,BPA,1st Year,1st Semester,
+PA102,Public Administration Theory,Theories of public admin,3,BPA,1st Year,2nd Semester,PA101
+POLSCI102,Local Government Administration,LGU management,3,BPA,1st Year,2nd Semester,POLSCI101
+FIL101,Komunikasyon sa Filipino,Filipino communication,3,BPA,1st Year,2nd Semester,
+GE102,Readings in Philippine History,Philippine history,3,BPA,1st Year,2nd Semester,
+PE102,Rhythmic Activities,Dance and fitness,2,BPA,1st Year,2nd Semester,PE101
+NSTP102,NSTP 2,Community service,3,BPA,1st Year,2nd Semester,NSTP101
+PA201,Public Personnel Administration,HR in public sector,3,BPA,2nd Year,1st Semester,PA102
+PA202,Public Financial Administration,Government budgeting,3,BPA,2nd Year,1st Semester,PA102
+LAW101,Administrative Law,Legal framework,3,BPA,2nd Year,1st Semester,
+GE103,The Contemporary World,Global perspectives,3,BPA,2nd Year,1st Semester,
+PE103,Individual Sports,Athletics,2,BPA,2nd Year,1st Semester,PE102
+PA203,Organization and Management,Organizational behavior,3,BPA,2nd Year,2nd Semester,PA201
+PA204,Public Policy Analysis,Policy formulation,3,BPA,2nd Year,2nd Semester,PA202
+ECO101,Philippine Economic Development,Economic systems,3,BPA,2nd Year,2nd Semester,
+GE104,Ethics,Moral philosophy,3,BPA,2nd Year,2nd Semester,
+PE104,Team Sports,Team athletics,2,BPA,2nd Year,2nd Semester,PE103
+PA301,Governance and Accountability,Good governance,3,BPA,3rd Year,1st Semester,"PA203,PA204"
+PA302,Development Administration,Development programs,3,BPA,3rd Year,1st Semester,PA204
+PA303,Public Service Delivery,Service quality,3,BPA,3rd Year,1st Semester,PA203
+GE105,Art Appreciation,Visual arts,3,BPA,3rd Year,1st Semester,
+GE201,Life and Works of Rizal,Rizal's legacy,3,BPA,3rd Year,1st Semester,
+PA304,Research in Public Administration,Research methods,3,BPA,3rd Year,2nd Semester,
+PA305,Practicum in Public Administration,Fieldwork,6,BPA,3rd Year,2nd Semester,"PA301,PA302,PA303"
+PA401,Capstone Project,Thesis writing,6,BPA,4th Year,1st Semester,"PA304,PA305"
+ED101,The Child and Adolescent Learners,Developmental psychology,3,BTLEd,1st Year,1st Semester,
+ED102,The Teaching Profession,Professional teacher standards,3,BTLEd,1st Year,1st Semester,
+ENG101,Purposive Communication,Communication skills,3,BTLEd,1st Year,1st Semester,
+GE101,Understanding the Self,Self-development,3,BTLEd,1st Year,1st Semester,
+PE101,Physical Fitness,Physical education,2,BTLEd,1st Year,1st Semester,
+NSTP101,NSTP 1,National service,3,BTLEd,1st Year,1st Semester,
+ED103,Principles of Teaching,Teaching methodologies,3,BTLEd,1st Year,2nd Semester,ED102
+TLE101,Fundamentals of TLE,TLE overview,3,BTLEd,1st Year,2nd Semester,
+FIL101,Komunikasyon sa Filipino,Filipino communication,3,BTLEd,1st Year,2nd Semester,
+GE102,Readings in Philippine History,Philippine history,3,BTLEd,1st Year,2nd Semester,
+PE102,Rhythmic Activities,Dance and fitness,2,BTLEd,1st Year,2nd Semester,PE101
+NSTP102,NSTP 2,Community service,3,BTLEd,1st Year,2nd Semester,NSTP101
+ED201,Curriculum Development,Curriculum design,3,BTLEd,2nd Year,1st Semester,ED103
+TLE201,Technology for Teaching and Learning,Educational technology,3,BTLEd,2nd Year,1st Semester,TLE101
+TLE202,Home Economics Education,Home economics,3,BTLEd,2nd Year,1st Semester,TLE101
+GE103,The Contemporary World,Global perspectives,3,BTLEd,2nd Year,1st Semester,
+PE103,Individual Sports,Athletics,2,BTLEd,2nd Year,1st Semester,PE102
+ED202,Assessment of Learning,Educational assessment,3,BTLEd,2nd Year,2nd Semester,ED201
+TLE203,Industrial Arts Education,Industrial arts,3,BTLEd,2nd Year,2nd Semester,TLE202
+TLE204,Entrepreneurship Education,Business education,3,BTLEd,2nd Year,2nd Semester,TLE202
+GE104,Ethics,Moral philosophy,3,BTLEd,2nd Year,2nd Semester,
+PE104,Team Sports,Team athletics,2,BTLEd,2nd Year,2nd Semester,PE103
+ED301,Facilitating Learner-Centered Teaching,Student-centered pedagogy,3,BTLEd,3rd Year,1st Semester,ED202
+TLE301,ICT Education,Information technology,3,BTLEd,3rd Year,1st Semester,TLE201
+TLE302,Agri-Fishery Arts Education,Agricultural education,3,BTLEd,3rd Year,1st Semester,TLE203
+GE105,Art Appreciation,Visual arts,3,BTLEd,3rd Year,1st Semester,
+GE201,Life and Works of Rizal,Rizal's legacy,3,BTLEd,3rd Year,1st Semester,
+ED302,Field Study 1,Classroom observation,3,BTLEd,3rd Year,2nd Semester,ED301
+ED303,Research in TLE,Research methods,3,BTLEd,3rd Year,2nd Semester,
+TLE303,TLE Capstone Project,Final project,3,BTLEd,3rd Year,2nd Semester,"TLE301,TLE302"
+ED401,Teaching Internship,Practice teaching,12,BTLEd,4th Year,1st Semester,"ED302,ED303"
+ED101,The Child and Adolescent Learners,Developmental psychology,3,BTVTEd,1st Year,1st Semester,
+ED102,The Teaching Profession,Professional standards,3,BTVTEd,1st Year,1st Semester,
+ENG101,Purposive Communication,Communication skills,3,BTVTEd,1st Year,1st Semester,
+GE101,Understanding the Self,Self-development,3,BTVTEd,1st Year,1st Semester,
+PE101,Physical Fitness,Physical education,2,BTVTEd,1st Year,1st Semester,
+NSTP101,NSTP 1,National service,3,BTVTEd,1st Year,1st Semester,
+ED103,Principles of Teaching,Teaching methodologies,3,BTVTEd,1st Year,2nd Semester,ED102
+TVE101,Fundamentals of TVE,Technical-vocational education,3,BTVTEd,1st Year,2nd Semester,
+FIL101,Komunikasyon sa Filipino,Filipino communication,3,BTVTEd,1st Year,2nd Semester,
+GE102,Readings in Philippine History,Philippine history,3,BTVTEd,1st Year,2nd Semester,
+PE102,Rhythmic Activities,Dance and fitness,2,BTVTEd,1st Year,2nd Semester,PE101
+NSTP102,NSTP 2,Community service,3,BTVTEd,1st Year,2nd Semester,NSTP101
+ED201,Curriculum Development,Curriculum design,3,BTVTEd,2nd Year,1st Semester,ED103
+TVE201,Competency-Based Assessment,Assessment methods,3,BTVTEd,2nd Year,1st Semester,TVE101
+TVE202,Technical Drawing and Design,CAD and drafting,3,BTVTEd,2nd Year,1st Semester,TVE101
+GE103,The Contemporary World,Global perspectives,3,BTVTEd,2nd Year,1st Semester,
+PE103,Individual Sports,Athletics,2,BTVTEd,2nd Year,1st Semester,PE102
+ED202,Assessment of Learning,Educational assessment,3,BTVTEd,2nd Year,2nd Semester,ED201
+TVE203,Electronics Technology,Electronics systems,3,BTVTEd,2nd Year,2nd Semester,TVE202
+TVE204,Automotive Technology,Automotive systems,3,BTVTEd,2nd Year,2nd Semester,TVE202
+GE104,Ethics,Moral philosophy,3,BTVTEd,2nd Year,2nd Semester,
+PE104,Team Sports,Team athletics,2,BTVTEd,2nd Year,2nd Semester,PE103
+ED301,Facilitating Learner-Centered Teaching,Student-centered methods,3,BTVTEd,3rd Year,1st Semester,ED202
+TVE301,Welding and Fabrication,Welding technology,3,BTVTEd,3rd Year,1st Semester,TVE203
+TVE302,Electrical Installation and Maintenance,Electrical systems,3,BTVTEd,3rd Year,1st Semester,TVE203
+GE105,Art Appreciation,Visual arts,3,BTVTEd,3rd Year,1st Semester,
+GE201,Life and Works of Rizal,Rizal's legacy,3,BTVTEd,3rd Year,1st Semester,
+ED302,Field Study 1,Classroom observation,3,BTVTEd,3rd Year,2nd Semester,ED301
+ED303,Research in TVE,Research methods,3,BTVTEd,3rd Year,2nd Semester,
+TVE303,TVE Capstone Project,Final project,3,BTVTEd,3rd Year,2nd Semester,"TVE301,TVE302"
+ED401,Teaching Internship,Practice teaching,12,BTVTEd,4th Year,1st Semester,"ED302,ED303"
+ED101,The Child and Adolescent Learners,Child development,3,BEEd,1st Year,1st Semester,
+ED102,The Teaching Profession,Professional ethics,3,BEEd,1st Year,1st Semester,
+ENG101,Purposive Communication,Communication skills,3,BEEd,1st Year,1st Semester,
+GE101,Understanding the Self,Self-awareness,3,BEEd,1st Year,1st Semester,
+PE101,Physical Fitness,Physical education,2,BEEd,1st Year,1st Semester,
+NSTP101,NSTP 1,National service,3,BEEd,1st Year,1st Semester,
+ED103,Principles of Teaching,Teaching foundations,3,BEEd,1st Year,2nd Semester,ED102
+MATH101,Mathematics for Elementary Teachers,Math pedagogy,3,BEEd,1st Year,2nd Semester,
+FIL101,Komunikasyon sa Filipino,Filipino communication,3,BEEd,1st Year,2nd Semester,
+GE102,Readings in Philippine History,Philippine history,3,BEEd,1st Year,2nd Semester,
+PE102,Rhythmic Activities,Dance and fitness,2,BEEd,1st Year,2nd Semester,PE101
+NSTP102,NSTP 2,Community service,3,BEEd,1st Year,2nd Semester,NSTP101
+ED201,Curriculum Development,Curriculum planning,3,BEEd,2nd Year,1st Semester,ED103
+SCI101,Science for Elementary Teachers,Science pedagogy,3,BEEd,2nd Year,1st Semester,
+FIL201,Panitikan ng Pilipinas,Philippine literature,3,BEEd,2nd Year,1st Semester,FIL101
+GE103,The Contemporary World,Global issues,3,BEEd,2nd Year,1st Semester,
+PE103,Individual Sports,Athletics,2,BEEd,2nd Year,1st Semester,PE102
+ED202,Assessment of Learning,Assessment strategies,3,BEEd,2nd Year,2nd Semester,ED201
+SOCSCI101,Social Studies for Elementary Teachers,Social studies pedagogy,3,BEEd,2nd Year,2nd Semester,
+ENG201,English for Elementary Teachers,English pedagogy,3,BEEd,2nd Year,2nd Semester,ENG101
+GE104,Ethics,Moral philosophy,3,BEEd,2nd Year,2nd Semester,
+PE104,Team Sports,Team athletics,2,BEEd,2nd Year,2nd Semester,PE103
+ED301,Facilitating Learner-Centered Teaching,Active learning,3,BEEd,3rd Year,1st Semester,ED202
+ED302,Technology for Teaching and Learning,Educational technology,3,BEEd,3rd Year,1st Semester,ED202
+MAPEH101,MAPEH for Elementary Teachers,Arts and PE pedagogy,3,BEEd,3rd Year,1st Semester,
+GE105,Art Appreciation,Visual arts,3,BEEd,3rd Year,1st Semester,
+GE201,Life and Works of Rizal,Rizal's life,3,BEEd,3rd Year,1st Semester,
+ED303,Field Study 1,Classroom observation,3,BEEd,3rd Year,2nd Semester,ED301
+ED304,Research in Education,Research methods,3,BEEd,3rd Year,2nd Semester,
+MTB101,Mother Tongue-Based Instruction,MTB pedagogy,3,BEEd,3rd Year,2nd Semester,
+ED401,Teaching Internship,Student teaching,12,BEEd,4th Year,1st Semester,"ED303,ED304"
+ED101,The Child and Adolescent Learners,Developmental stages,3,BSEd,1st Year,1st Semester,
+ED102,The Teaching Profession,Professional standards,3,BSEd,1st Year,1st Semester,
+ENG101,Purposive Communication,Communication skills,3,BSEd,1st Year,1st Semester,
+GE101,Understanding the Self,Self-development,3,BSEd,1st Year,1st Semester,
+PE101,Physical Fitness,Physical education,2,BSEd,1st Year,1st Semester,
+NSTP101,NSTP 1,National service,3,BSEd,1st Year,1st Semester,
+ED103,Principles of Teaching,Teaching methodologies,3,BSEd,1st Year,2nd Semester,ED102
+MAJ101,Introduction to Major,Specialization overview,3,BSEd,1st Year,2nd Semester,
+FIL101,Komunikasyon sa Filipino,Filipino communication,3,BSEd,1st Year,2nd Semester,
+GE102,Readings in Philippine History,Philippine history,3,BSEd,1st Year,2nd Semester,
+PE102,Rhythmic Activities,Dance and fitness,2,BSEd,1st Year,2nd Semester,PE101
+NSTP102,NSTP 2,Community service,3,BSEd,1st Year,2nd Semester,NSTP101
+ED201,Curriculum Development,Curriculum design,3,BSEd,2nd Year,1st Semester,ED103
+MAJ201,Content and Pedagogy of Major 1,Subject matter and methods,3,BSEd,2nd Year,1st Semester,MAJ101
+ED202,Assessment of Learning 1,Assessment basics,3,BSEd,2nd Year,1st Semester,ED103
+GE103,The Contemporary World,Global perspectives,3,BSEd,2nd Year,1st Semester,
+PE103,Individual Sports,Athletics,2,BSEd,2nd Year,1st Semester,PE102
+ED203,Assessment of Learning 2,Advanced assessment,3,BSEd,2nd Year,2nd Semester,ED202
+MAJ202,Content and Pedagogy of Major 2,Advanced methods,3,BSEd,2nd Year,2nd Semester,MAJ201
+ED204,Technology for Teaching and Learning,Educational technology,3,BSEd,2nd Year,2nd Semester,ED201
+GE104,Ethics,Moral philosophy,3,BSEd,2nd Year,2nd Semester,
+PE104,Team Sports,Team athletics,2,BSEd,2nd Year,2nd Semester,PE103
+ED301,Facilitating Learner-Centered Teaching,Student-centered pedagogy,3,BSEd,3rd Year,1st Semester,"ED203,ED204"
+MAJ301,Content and Pedagogy of Major 3,Specialized teaching,3,BSEd,3rd Year,1st Semester,MAJ202
+ED302,Building and Enhancing Literacy,Literacy development,3,BSEd,3rd Year,1st Semester,ED203
+GE105,Art Appreciation,Visual arts,3,BSEd,3rd Year,1st Semester,
+GE201,Life and Works of Rizal,Rizal's legacy,3,BSEd,3rd Year,1st Semester,
+ED303,Field Study 1,Classroom observation,3,BSEd,3rd Year,2nd Semester,ED301
+MAJ302,Content and Pedagogy of Major 4,Master teaching,3,BSEd,3rd Year,2nd Semester,MAJ301
+ED304,Research in Education,Research methods,3,BSEd,3rd Year,2nd Semester,
+ED401,Teaching Internship,Practice teaching,12,BSEd,4th Year,1st Semester,"ED303,ED304"
+ED101,The Child and Adolescent Learners,Developmental psychology,3,BCAEd,1st Year,1st Semester,
+ED102,The Teaching Profession,Professional ethics,3,BCAEd,1st Year,1st Semester,
+ENG101,Purposive Communication,Communication skills,3,BCAEd,1st Year,1st Semester,
+GE101,Understanding the Self,Self-awareness,3,BCAEd,1st Year,1st Semester,
+PE101,Physical Fitness,Physical education,2,BCAEd,1st Year,1st Semester,
+NSTP101,NSTP 1,National service,3,BCAEd,1st Year,1st Semester,
+ED103,Principles of Teaching,Teaching foundations,3,BCAEd,1st Year,2nd Semester,ED102
+ART101,Elements and Principles of Arts,Art fundamentals,3,BCAEd,1st Year,2nd Semester,
+FIL101,Komunikasyon sa Filipino,Filipino communication,3,BCAEd,1st Year,2nd Semester,
+GE102,Readings in Philippine History,Philippine history,3,BCAEd,1st Year,2nd Semester,
+PE102,Rhythmic Activities,Dance and fitness,2,BCAEd,1st Year,2nd Semester,PE101
+NSTP102,NSTP 2,Community service,3,BCAEd,1st Year,2nd Semester,NSTP101
+ED201,Curriculum Development,Curriculum planning,3,BCAEd,2nd Year,1st Semester,ED103
+ART201,Philippine Arts and Culture,Filipino artistry,3,BCAEd,2nd Year,1st Semester,ART101
+ART202,Visual Arts Education,Visual arts pedagogy,3,BCAEd,2nd Year,1st Semester,ART101
+GE103,The Contemporary World,Global issues,3,BCAEd,2nd Year,1st Semester,
+PE103,Individual Sports,Athletics,2,BCAEd,2nd Year,1st Semester,PE102
+ED202,Assessment of Learning,Assessment strategies,3,BCAEd,2nd Year,2nd Semester,ED201
+ART203,Music Education,Music pedagogy,3,BCAEd,2nd Year,2nd Semester,ART201
+ART204,Dance Education,Dance pedagogy,3,BCAEd,2nd Year,2nd Semester,ART201
+GE104,Ethics,Moral philosophy,3,BCAEd,2nd Year,2nd Semester,
+PE104,Team Sports,Team athletics,2,BCAEd,2nd Year,2nd Semester,PE103
+ED301,Facilitating Learner-Centered Teaching,Active learning,3,BCAEd,3rd Year,1st Semester,ED202
+ART301,Theater Arts Education,Drama pedagogy,3,BCAEd,3rd Year,1st Semester,ART203
+ART302,Indigenous Arts and Culture,Indigenous traditions,3,BCAEd,3rd Year,1st Semester,ART201
+GE105,Art Appreciation,Visual arts,3,BCAEd,3rd Year,1st Semester,
+GE201,Life and Works of Rizal,Rizal's life,3,BCAEd,3rd Year,1st Semester,
+ED302,Field Study 1,Classroom observation,3,BCAEd,3rd Year,2nd Semester,ED301
+ART303,Contemporary Arts,Modern art forms,3,BCAEd,3rd Year,2nd Semester,"ART301,ART302"
+ED303,Research in Arts Education,Research methods,3,BCAEd,3rd Year,2nd Semester,
+ED401,Teaching Internship,Student teaching,12,BCAEd,4th Year,1st Semester,"ED302,ED303"
+CRIM101,Introduction to Criminology,Criminology foundations,3,BSCrim,1st Year,1st Semester,
+CRIM102,Criminal Law 1,Penal code basics,3,BSCrim,1st Year,1st Semester,
+ENG101,Purposive Communication,Communication skills,3,BSCrim,1st Year,1st Semester,
+GE101,Understanding the Self,Self-awareness,3,BSCrim,1st Year,1st Semester,
+PE101,Physical Fitness,Physical education,2,BSCrim,1st Year,1st Semester,
+NSTP101,NSTP 1,National service,3,BSCrim,1st Year,1st Semester,
+CRIM103,Human Behavior and Crisis Management,Psychology and crisis,3,BSCrim,1st Year,2nd Semester,CRIM101
+CRIM104,Criminal Law 2,Advanced penal code,3,BSCrim,1st Year,2nd Semester,CRIM102
+FIL101,Komunikasyon sa Filipino,Filipino communication,3,BSCrim,1st Year,2nd Semester,
+GE102,Readings in Philippine History,Philippine history,3,BSCrim,1st Year,2nd Semester,
+PE102,Rhythmic Activities,Dance and fitness,2,BSCrim,1st Year,2nd Semester,PE101
+NSTP102,NSTP 2,Community service,3,BSCrim,1st Year,2nd Semester,NSTP101
+CRIM201,Criminal Investigation and Detection,Investigation techniques,3,BSCrim,2nd Year,1st Semester,CRIM103
+CRIM202,Criminalistics 1,Forensic science,3,BSCrim,2nd Year,1st Semester,CRIM103
+CRIM203,Law Enforcement Administration,Police management,3,BSCrim,2nd Year,1st Semester,CRIM104
+GE103,The Contemporary World,Global perspectives,3,BSCrim,2nd Year,1st Semester,
+PE103,Individual Sports,Athletics,2,BSCrim,2nd Year,1st Semester,PE102
+CRIM204,Criminalistics 2,Advanced forensics,3,BSCrim,2nd Year,2nd Semester,CRIM202
+CRIM205,Criminal Procedure and Evidence,Legal procedures,3,BSCrim,2nd Year,2nd Semester,CRIM203
+CRIM206,Drugs and Vice Control,Drug enforcement,3,BSCrim,2nd Year,2nd Semester,CRIM201
+GE104,Ethics,Moral philosophy,3,BSCrim,2nd Year,2nd Semester,
+PE104,Team Sports,Team athletics,2,BSCrim,2nd Year,2nd Semester,PE103
+CRIM301,Fire Safety and Arson Investigation,Fire investigation,3,BSCrim,3rd Year,1st Semester,CRIM204
+CRIM302,Correctional Administration,Corrections management,3,BSCrim,3rd Year,1st Semester,CRIM205
+CRIM303,Industrial Security Management,Security systems,3,BSCrim,3rd Year,1st Semester,CRIM203
+GE105,Art Appreciation,Visual arts,3,BSCrim,3rd Year,1st Semester,
+GE201,Life and Works of Rizal,Rizal's legacy,3,BSCrim,3rd Year,1st Semester,
+CRIM304,Legal Medicine,Forensic medicine,3,BSCrim,3rd Year,2nd Semester,CRIM204
+CRIM305,Criminal Justice Research,Research methods,3,BSCrim,3rd Year,2nd Semester,
+CRIM306,Practicum 1,Field training,6,BSCrim,3rd Year,2nd Semester,"CRIM301,CRIM302,CRIM303"
+CRIM401,Comparative Criminal Justice System,International systems,3,BSCrim,4th Year,1st Semester,CRIM305
+CRIM402,Criminology Thesis,Research project,6,BSCrim,4th Year,2nd Semester,CRIM401

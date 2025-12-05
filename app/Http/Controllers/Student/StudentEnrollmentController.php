@@ -15,11 +15,21 @@ class StudentEnrollmentController extends Controller
         // Group enrollments by semester/academic year
         $enrollments = $student->enrollments()
             ->with(['subject', 'academicYear'])
-            ->latest()
-            ->get()
-            ->groupBy(function ($enrollment) {
-                return $enrollment->academicYear->year_code . ' - ' . $enrollment->academicYear->semester;
-            });
+            ->get();
+
+        // Sort by academic year code descending (newest first)
+        $enrollments = $enrollments->sortByDesc(function ($enrollment) {
+            return $enrollment->academicYear->year_code ?? '';
+        });
+
+        // Group by semester with year level
+        $enrollments = $enrollments->groupBy(function ($enrollment) {
+            if ($enrollment->academicYear && $enrollment->subject) {
+                $yearLevel = $enrollment->subject->year_level;
+                return $enrollment->academicYear->year_code . ' - ' . $enrollment->academicYear->semester . ' (' . $yearLevel . ')';
+            }
+            return 'No Academic Year';
+        });
 
         return view('student.enrollments', compact('student', 'enrollments'));
     }

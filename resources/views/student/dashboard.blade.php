@@ -98,19 +98,47 @@
         </div>
 
 
-        <!-- Enrollments by Semester -->
-        @if($enrollmentsBySemester->isNotEmpty())
-            @foreach($enrollmentsBySemester as $semesterLabel => $enrollments)
-            <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
-                <div class="relative overflow-hidden px-6 py-4 flex items-center justify-between" style="background: linear-gradient(135deg, #047857, #0f766e, #115e59);">
-                    <div class="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-white opacity-10"></div>
-                    <div class="absolute -left-6 -bottom-6 h-20 w-20 rounded-full bg-white opacity-10"></div>
-                    <h3 class="relative z-10 text-lg font-semibold text-white">{{ $semesterLabel }}</h3>
-                    <span class="relative z-10 text-sm text-emerald-100 font-medium">{{ $enrollments->count() }} {{ Str::plural('subject', $enrollments->count()) }}</span>
+        <!-- Enrollments by Year Level -->
+        @if($enrollmentsByYearLevel->isNotEmpty())
+            @foreach($enrollmentsByYearLevel as $yearLevel => $semesters)
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-8 border-2 border-gray-200">
+                <!-- Year Level Header -->
+                <div class="relative overflow-hidden px-8 py-5" style="background: linear-gradient(135deg, #1e40af, #1e3a8a, #312e81);">
+                    <div class="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-white opacity-10"></div>
+                    <div class="absolute -left-10 -bottom-10 h-28 w-28 rounded-full bg-white opacity-10"></div>
+                    <div class="relative z-10 flex items-center justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold text-white">{{ $yearLevel }}</h2>
+                            <p class="text-sm text-blue-200 mt-1">Academic Progress</p>
+                        </div>
+                        @php
+                            $totalSubjects = $semesters->flatten()->count();
+                            $completedSubjects = $semesters->flatten()->where('status', 'Completed')->count();
+                        @endphp
+                        <div class="text-right">
+                            <p class="text-3xl font-bold text-white">{{ $totalSubjects }}</p>
+                            <p class="text-sm text-blue-200">{{ Str::plural('Subject', $totalSubjects) }}</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="overflow-x-auto">
-                    <table class="w-full">
-                        <thead class="bg-gray-50 border-b border-gray-200">
+
+                <!-- Semesters within this year level -->
+                <div class="p-6 space-y-6">
+                    @foreach($semesters as $semesterLabel => $enrollments)
+                    <div class="bg-white rounded-xl overflow-hidden shadow-md border-2 border-gray-200 hover:border-emerald-400 transition-all duration-200">
+                        <div class="px-6 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+                                <h3 class="text-base font-semibold text-white">{{ $semesterLabel }}</h3>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="px-3 py-1 bg-white/20 rounded-full text-xs text-white font-medium">{{ $enrollments->count() }} {{ Str::plural('subject', $enrollments->count()) }}</span>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-gray-50">
+                            <div class="overflow-x-auto">
+                    <table class="w-full bg-white rounded-lg overflow-hidden">
+                        <thead class="bg-gray-100 border-b-2 border-gray-300">
                             <tr>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Code</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subject Name</th>
@@ -182,7 +210,10 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
             </div>
             @endforeach
         @else

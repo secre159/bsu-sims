@@ -8,6 +8,7 @@ use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AcademicYearController;
 use App\Http\Controllers\ImportController;
+use App\Http\Controllers\SubjectImportController;
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\StudentSubjectController;
 use App\Http\Controllers\Student\StudentLoginController;
@@ -78,6 +79,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         // Subjects Management
         Route::resource('subjects', SubjectController::class);
+        
+        // Subject Import
+        Route::get('/subjects-import', [SubjectImportController::class, 'create'])->name('subjects.import.form');
+        Route::post('/subjects-import', [SubjectImportController::class, 'store'])->name('subjects.import');
+        Route::get('/subjects-import/template', [SubjectImportController::class, 'downloadTemplate'])->name('subjects.import.template');
 
         // Academic Years Management
         Route::resource('academic-years', AcademicYearController::class);

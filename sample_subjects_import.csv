@@ -1,0 +1,21 @@
+Code,Name,Description,Units,Program Code,Year Level,Semester,Prerequisites
+MATH101,Calculus 1,Differential calculus and basic integration,3,BSIT,1st Year,1st Semester,
+CS101,Introduction to Programming,Fundamentals of programming using Python,3,BSIT,1st Year,1st Semester,
+ENG101,English Communication,Academic writing and communication skills,3,BSIT,1st Year,1st Semester,
+PE101,Physical Education 1,Physical fitness and wellness,2,BSIT,1st Year,1st Semester,
+NSTP101,National Service Training Program 1,Community service fundamentals,3,BSIT,1st Year,1st Semester,
+MATH102,Calculus 2,Advanced integration and differential equations,3,BSIT,1st Year,2nd Semester,MATH101
+CS102,Data Structures and Algorithms,Arrays linked lists trees graphs,3,BSIT,1st Year,2nd Semester,CS101
+CS103,Discrete Mathematics,Logic sets relations functions,3,BSIT,1st Year,2nd Semester,MATH101
+FIL101,Komunikasyon sa Filipino,Filipino language and communication,3,BSIT,1st Year,2nd Semester,
+PE102,Physical Education 2,Sports and recreation,2,BSIT,1st Year,2nd Semester,PE101
+CS201,Object-Oriented Programming,OOP principles using Java,3,BSIT,2nd Year,1st Semester,"CS101,CS102"
+CS202,Database Management Systems,Relational databases and SQL,3,BSIT,2nd Year,1st Semester,CS102
+CS203,Computer Architecture,Digital logic and computer organization,3,BSIT,2nd Year,1st Semester,CS103
+MATH201,Statistics and Probability,Statistical methods and probability theory,3,BSIT,2nd Year,1st Semester,MATH102
+HUM101,Philippine History,Philippine historical development,3,BSIT,2nd Year,1st Semester,
+CS204,Web Development,HTML CSS JavaScript frameworks,3,BSIT,2nd Year,2nd Semester,CS201
+CS205,Operating Systems,Process management and memory,3,BSIT,2nd Year,2nd Semester,CS203
+CS206,Software Engineering,SDLC and agile methodologies,3,BSIT,2nd Year,2nd Semester,CS201
+MATH202,Linear Algebra,Matrices vector spaces transformations,3,BSIT,2nd Year,2nd Semester,MATH201
+SCI101,Environmental Science,Sustainability and ecology,3,BSIT,2nd Year,2nd Semester,
