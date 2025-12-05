@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     libpq-dev \
+    libzip-dev \
     nodejs \
     npm
 
