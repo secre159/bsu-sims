@@ -1,27 +1,128 @@
-/* Custom Modern UI Enhancements for BSU-Bokod SIMS */
+/* ============================================
+   BSU-Bokod SIMS - Custom Component Styles
+   ============================================
+   Reusable utility classes built on Tailwind's
+   semantic color tokens for consistent theming.
+   ============================================ */
 
-/* =====================================================
-   GREEN DESIGN SYSTEM - COLOR PALETTE & VARIABLES
-   ===================================================== */
+/* Landing Page & Hero Components
+   ==================== */
+
+/* Hero background gradient */
+.hero-bg {
+    background: linear-gradient(135deg, #064e3b 0%, #0f172a 50%, #1a2332 100%);
+    @apply text-white;
+}
+
+/* Hero title gradient text */
+.hero-title-gradient {
+    @apply bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent;
+}
+
+/* Portal Card Components
+   ==================== */
+
+/* Portal card wrapper with hover lift */
+.portal-card {
+    @apply relative bg-white rounded-2xl shadow-lg overflow-hidden 
+           transition-all duration-300 transform 
+           hover:-translate-y-2 hover:shadow-2xl;
+}
+
+/* Top gradient bars for portal cards */
+.portal-top-indigo {
+    @apply absolute top-0 left-0 w-full h-2 
+           bg-gradient-to-r from-indigo-500 to-blue-600;
+}
+
+.portal-top-green {
+    @apply absolute top-0 left-0 w-full h-2 
+           bg-gradient-to-r from-green-500 to-emerald-600;
+}
+
+.portal-top-primary {
+    @apply absolute top-0 left-0 w-full h-2 
+           bg-gradient-to-r from-primary-500 to-primary-600;
+}
+
+.portal-top-success {
+    @apply absolute top-0 left-0 w-full h-2 
+           bg-gradient-to-r from-success-500 to-success-600;
+}
+
+/* Portal icon wrappers */
+.portal-icon-indigo {
+    @apply p-4 rounded-2xl bg-indigo-100 text-indigo-600 
+           transition-transform duration-300 group-hover:scale-110;
+}
+
+.portal-icon-green {
+    @apply p-4 rounded-2xl bg-green-100 text-green-600 
+           transition-transform duration-300 group-hover:scale-110;
+}
+
+.portal-icon-primary {
+    @apply p-4 rounded-2xl bg-primary-100 text-primary-600 
+           transition-transform duration-300 group-hover:scale-110;
+}
+
+.portal-icon-success {
+    @apply p-4 rounded-2xl bg-success-100 text-success-600 
+           transition-transform duration-300 group-hover:scale-110;
+}
+
+/* Portal CTA text */
+.portal-cta-text {
+    @apply inline-flex items-center font-semibold transition-colors;
+}
+
+/* Focus styles for portal cards */
+.portal-card:focus,
+.portal-card:focus-within {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+}
+
+/* Landing page muted text */
+.landing-muted {
+    @apply text-gray-300;
+}
+
+/* CSS Variables for Semantic Colors
+   ==================== */
 :root {
-    /* Primary Green Shades */
-    --color-green-deep: #1e7e34;
-    --color-green-primary: #2d5016;
-    --color-green-medium: #4CAF50;
-    --color-green-light: #A5D6A7;
-    --color-green-pale: #F1F8F4;
+    /* Primary (Blue) */
+    --color-primary: #3b82f6;
+    --color-primary-light: #eff6ff;
+    --color-primary-dark: #1e40af;
     
-    /* Supporting Colors */
-    --color-gold-accent: #D4AF37;
-    --color-status-red: #E53935;
-    --color-status-yellow: #FBC02D;
-    --color-status-green: #4CAF50;
+    /* Success (Emerald) */
+    --color-success: #10b981;
+    --color-success-light: #ecfdf5;
+    --color-success-dark: #065f46;
+    
+    /* Warning (Amber) */
+    --color-warning: #f59e0b;
+    --color-warning-light: #fffbeb;
+    --color-warning-dark: #92400e;
+    
+    /* Danger (Red) */
+    --color-danger: #ef4444;
+    --color-danger-light: #fef2f2;
+    --color-danger-dark: #991b1b;
+    
+    /* Accent (Violet) */
+    --color-accent: #8b5cf6;
+    --color-accent-light: #f5f3ff;
+    --color-accent-dark: #5b21b6;
     
     /* Neutral Grays */
-    --color-gray-50: #F5F5F5;
-    --color-gray-100: #E0E0E0;
-    --color-gray-500: #9E9E9E;
-    --color-gray-900: #424242;
+    --color-gray-50: #f9fafb;
+    --color-gray-100: #f3f4f6;
+    --color-gray-200: #e5e7eb;
+    --color-gray-500: #6b7280;
+    --color-gray-700: #374151;
+    --color-gray-800: #1f2937;
+    --color-gray-900: #111827;
 }
 
 /* Smooth scrolling */
@@ -71,83 +172,160 @@ main {
     animation: fadeIn 0.5s ease-out;
 }
 
-/* Enhanced button styles with green palette */
+/* Button Styles
+   ==================== */
+
+/* Primary Button - Main CTAs */
 .btn-primary {
-    background: linear-gradient(135deg, var(--color-green-deep) 0%, var(--color-green-medium) 100%);
-    @apply text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300;
+    @apply inline-flex items-center px-4 py-2 
+           bg-primary-600 border border-transparent 
+           rounded-md font-semibold text-xs text-white 
+           uppercase tracking-widest 
+           hover:bg-primary-700 active:bg-primary-900 
+           focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 
+           disabled:opacity-50 
+           transition ease-in-out duration-150;
 }
 
-.btn-primary:hover {
-    background: linear-gradient(135deg, #0d5f2a 0%, #2d9a3a 100%);
-}
-
+/* Success Button - Confirmations, saves */
 .btn-success {
-    background: linear-gradient(135deg, var(--color-green-medium) 0%, #66BB6A 100%);
-    @apply text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300;
+    @apply inline-flex items-center px-4 py-2 
+           bg-success-600 border border-transparent 
+           rounded-md font-semibold text-xs text-white 
+           uppercase tracking-widest 
+           hover:bg-success-700 active:bg-success-900 
+           focus:outline-none focus:ring-2 focus:ring-success-500 focus:ring-offset-2 
+           disabled:opacity-50 
+           transition ease-in-out duration-150;
 }
 
-.btn-success:hover {
-    background: linear-gradient(135deg, #388E3C 0%, #43A047 100%);
+/* Warning Button - Caution actions */
+.btn-warning {
+    @apply inline-flex items-center px-4 py-2 
+           bg-warning-500 border border-transparent 
+           rounded-md font-semibold text-xs text-white 
+           uppercase tracking-widest 
+           hover:bg-warning-600 active:bg-warning-800 
+           focus:outline-none focus:ring-2 focus:ring-warning-400 focus:ring-offset-2 
+           disabled:opacity-50 
+           transition ease-in-out duration-150;
 }
 
+/* Danger Button - Destructive actions */
 .btn-danger {
-    background: linear-gradient(135deg, var(--color-status-red) 0%, #F44336 100%);
-    @apply text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300;
+    @apply inline-flex items-center px-4 py-2 
+           bg-danger-600 border border-transparent 
+           rounded-md font-semibold text-xs text-white 
+           uppercase tracking-widest 
+           hover:bg-danger-700 active:bg-danger-900 
+           focus:outline-none focus:ring-2 focus:ring-danger-500 focus:ring-offset-2 
+           disabled:opacity-50 
+           transition ease-in-out duration-150;
 }
 
-.btn-danger:hover {
-    background: linear-gradient(135deg, #C62828 0%, #E53935 100%);
-}
-
+/* Secondary Button - Less prominent actions */
 .btn-secondary {
-    background: linear-gradient(135deg, #757575 0%, #9E9E9E 100%);
-    @apply text-white font-semibold px-6 py-3 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300;
+    @apply inline-flex items-center px-4 py-2 
+           bg-white border border-gray-300 
+           rounded-md font-semibold text-xs text-gray-700 
+           uppercase tracking-widest 
+           shadow-sm hover:bg-gray-50 
+           focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 
+           disabled:opacity-50 
+           transition ease-in-out duration-150;
 }
 
-.btn-secondary:hover {
-    background: linear-gradient(135deg, #616161 0%, #757575 100%);
-}
+/* Card Styles
+   ==================== */
 
-/* Enhanced card styles with green palette */
+/* Modern card with soft shadows and borders */
 .card-modern {
-    @apply bg-white rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300 border-2;
-    border-color: var(--color-green-pale);
+    @apply bg-white rounded-lg border border-gray-200 shadow-sm 
+           overflow-hidden transition-shadow duration-200 
+           hover:shadow-md;
 }
 
-/* Enhanced table styles with green header */
+/* Card header with bottom border */
+.card-header {
+    @apply px-6 py-4 border-b border-gray-200 bg-gray-50;
+}
+
+/* Card body with consistent padding */
+.card-body {
+    @apply px-6 py-4;
+}
+
+/* Card footer with top border */
+.card-footer {
+    @apply px-6 py-4 border-t border-gray-200 bg-gray-50;
+}
+
+/* Stat card icon container - pastel backgrounds */
+.stat-icon-primary {
+    @apply flex items-center justify-center h-12 w-12 rounded-md 
+           bg-primary-50 text-primary-600;
+}
+
+.stat-icon-success {
+    @apply flex items-center justify-center h-12 w-12 rounded-md 
+           bg-success-50 text-success-600;
+}
+
+.stat-icon-warning {
+    @apply flex items-center justify-center h-12 w-12 rounded-md 
+           bg-warning-50 text-warning-600;
+}
+
+.stat-icon-danger {
+    @apply flex items-center justify-center h-12 w-12 rounded-md 
+           bg-danger-50 text-danger-600;
+}
+
+.stat-icon-accent {
+    @apply flex items-center justify-center h-12 w-12 rounded-md 
+           bg-accent-50 text-accent-600;
+}
+
+/* Table Styles
+   ==================== */
+
 table thead tr {
-    background: linear-gradient(to right, var(--color-green-deep), var(--color-green-medium));
-    @apply text-white;
+    @apply bg-gray-50 border-b border-gray-200;
 }
 
 table thead th {
-    @apply text-white font-bold;
-    color: #ffffff !important;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    @apply text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
 }
 
 table tbody tr {
-    @apply transition-colors duration-200;
-}
-
-table tbody tr:nth-child(odd) {
-    background-color: white;
-}
-
-table tbody tr:nth-child(even) {
-    background-color: var(--color-green-pale);
+    @apply transition-colors duration-200 border-b border-gray-200;
 }
 
 table tbody tr:hover {
-    background-color: var(--color-green-light) !important;
-    opacity: 0.7;
+    @apply bg-gray-50;
 }
 
-/* Custom focus styles with green palette */
+/* Input & Form Styles
+   ==================== */
+
+/* Enhanced focus ring for inputs */
+.input-primary {
+    @apply border-gray-300 rounded-md shadow-sm 
+           focus:border-primary-500 focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50 
+           transition duration-150 ease-in-out;
+}
+
+.input-danger {
+    @apply border-danger-300 rounded-md shadow-sm 
+           focus:border-danger-500 focus:ring-2 focus:ring-danger-500 focus:ring-opacity-50 
+           transition duration-150 ease-in-out;
+}
+
+/* Default focus for all inputs */
 input:focus, select:focus, textarea:focus {
     @apply ring-2 ring-opacity-50 outline-none;
-    border-color: var(--color-green-medium);
-    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 /* Enhanced select box styles - override Tailwind Forms plugin */
@@ -169,34 +347,143 @@ select::-ms-expand {
 }
 
 select:focus {
-    border-color: var(--color-green-medium) !important;
-    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1) !important;
+    border-color: var(--color-primary) !important;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1) !important;
 }
 
-/* Badge styles */
+/* Badge Styles
+   ==================== */
+
+/* Base badge structure */
 .badge {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium;
+    @apply inline-flex items-center px-2.5 py-0.5 
+           rounded-full text-xs font-medium;
 }
 
+/* Primary badge */
+.badge-primary {
+    @apply badge bg-primary-100 text-primary-800;
+}
+
+/* Success badge */
 .badge-success {
-    @apply bg-green-100 text-green-800;
+    @apply badge bg-success-100 text-success-800;
 }
 
+/* Warning badge */
 .badge-warning {
-    @apply bg-yellow-100 text-yellow-800;
+    @apply badge bg-warning-100 text-warning-800;
 }
 
+/* Danger badge */
 .badge-danger {
-    @apply bg-red-100 text-red-800;
+    @apply badge bg-danger-100 text-danger-800;
 }
 
-.badge-info {
-    @apply bg-blue-100 text-blue-800;
+/* Accent badge */
+.badge-accent {
+    @apply badge bg-accent-100 text-accent-800;
+}
+
+/* Neutral badge */
+.badge-gray {
+    @apply badge bg-gray-100 text-gray-800;
 }
 
 /* Loading states */
 .loading {
     animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Alert Styles
+   ==================== */
+
+/* Base alert structure */
+.alert {
+    @apply p-4 rounded-md border;
+}
+
+/* Primary alert */
+.alert-primary {
+    @apply alert bg-primary-50 border-primary-200 text-primary-800;
+}
+
+/* Success alert */
+.alert-success {
+    @apply alert bg-success-50 border-success-200 text-success-800;
+}
+
+/* Warning alert */
+.alert-warning {
+    @apply alert bg-warning-50 border-warning-200 text-warning-800;
+}
+
+/* Danger alert */
+.alert-danger {
+    @apply alert bg-danger-50 border-danger-200 text-danger-800;
+}
+
+/* Accent alert */
+.alert-accent {
+    @apply alert bg-accent-50 border-accent-200 text-accent-800;
+}
+
+/* Utility Classes
+   ==================== */
+
+/* Text colors with semantic meaning */
+.text-primary {
+    @apply text-primary-600;
+}
+
+.text-success {
+    @apply text-success-600;
+}
+
+.text-warning {
+    @apply text-warning-600;
+}
+
+.text-danger {
+    @apply text-danger-600;
+}
+
+.text-accent {
+    @apply text-accent-600;
+}
+
+/* Background colors with semantic meaning */
+.bg-primary-light {
+    @apply bg-primary-50;
+}
+
+.bg-success-light {
+    @apply bg-success-50;
+}
+
+.bg-warning-light {
+    @apply bg-warning-50;
+}
+
+.bg-danger-light {
+    @apply bg-danger-50;
+}
+
+.bg-accent-light {
+    @apply bg-accent-50;
+}
+
+/* Link styles */
+.link-primary {
+    @apply text-primary-600 hover:text-primary-700 
+           underline-offset-2 hover:underline 
+           transition-colors duration-150;
+}
+
+.link-danger {
+    @apply text-danger-600 hover:text-danger-700 
+           underline-offset-2 hover:underline 
+           transition-colors duration-150;
 }
 
 /* Custom scrollbar */
@@ -211,12 +498,12 @@ select:focus {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--color-green-medium), var(--color-green-light));
+    background: linear-gradient(180deg, var(--color-primary), #93c5fd);
     border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, var(--color-green-deep), var(--color-green-medium));
+    background: linear-gradient(180deg, var(--color-primary-dark), var(--color-primary));
 }
 
 /* Glassmorphism effect */
@@ -226,15 +513,9 @@ select:focus {
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-/* Gradient text with green palette */
+/* Gradient text with semantic palette */
 .gradient-text {
-    background: linear-gradient(135deg, var(--color-green-deep), var(--color-green-medium));
-    @apply bg-clip-text text-transparent;
-}
-
-/* Green gradient text variant */
-.gradient-text-green {
-    background: linear-gradient(135deg, var(--color-green-medium), var(--color-green-light));
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
     @apply bg-clip-text text-transparent;
 }
 
@@ -243,26 +524,17 @@ select:focus {
     @apply transition-transform duration-300 hover:-translate-y-1;
 }
 
-/* Shadow effects with updated colors */
-.shadow-colored-green {
-    box-shadow: 0 10px 40px -10px rgba(76, 175, 80, 0.6);
+/* Shadow effects with semantic colors */
+.shadow-primary {
+    box-shadow: 0 10px 40px -10px rgba(59, 130, 246, 0.3);
 }
 
-.shadow-colored-green-dark {
-    box-shadow: 0 10px 40px -10px rgba(30, 126, 52, 0.6);
+.shadow-success {
+    box-shadow: 0 10px 40px -10px rgba(16, 185, 129, 0.3);
 }
 
-.shadow-colored-gold {
-    box-shadow: 0 10px 40px -10px rgba(212, 175, 55, 0.5);
-}
-
-/* Deprecated: Keep for backward compatibility */
-.shadow-colored-blue {
-    box-shadow: 0 10px 40px -10px rgba(76, 175, 80, 0.5);
-}
-
-.shadow-colored-purple {
-    box-shadow: 0 10px 40px -10px rgba(76, 175, 80, 0.4);
+.shadow-accent {
+    box-shadow: 0 10px 40px -10px rgba(139, 92, 246, 0.3);
 }
 
 /* Print styles */
@@ -279,7 +551,7 @@ select:focus {
 
 /* Navigation link underline helpers */
 .nav-link-animated { position: relative; }
-.nav-link-bar { position: absolute; left: 0; right: 0; height: 2px; background: var(--color-green-light); transform-origin: left; transform: scaleX(0); transition: transform .25s ease; }
+.nav-link-bar { position: absolute; left: 0; right: 0; height: 2px; background: var(--color-primary); transform-origin: left; transform: scaleX(0); transition: transform .25s ease; }
 .nav-link-bar.top { top: -2px; }
 .nav-link-bar.bottom { bottom: -2px; }
 .nav-link-animated:hover .nav-link-bar.bottom { transform: scaleX(1); }

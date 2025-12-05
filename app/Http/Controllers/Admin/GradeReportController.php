@@ -20,11 +20,11 @@ class GradeReportController extends Controller
     }
 
     /**
-     * Generate GPA report
+     * Generate GWA report
      */
     public function gpaReport(Request $request)
     {
-        $query = Student::whereNotNull('gpa')->with('program');
+        $query = Student::whereNotNull('gwa')->with('program');
 
         if ($request->filled('academic_standing')) {
             $query->where('academic_standing', $request->input('academic_standing'));
@@ -38,7 +38,7 @@ class GradeReportController extends Controller
             $query->where('year_level', $request->input('year_level'));
         }
 
-        $students = $query->orderByDesc('gpa')->paginate(50);
+        $students = $query->orderBy('gwa')->paginate(50);
 
         return view('admin.reports.gpa-report', compact('students'));
     }
@@ -71,13 +71,13 @@ class GradeReportController extends Controller
     {
         $students = Student::where('academic_standing', 'Dean\'s Lister')
             ->with('program')
-            ->orderByDesc('gpa')
+            ->orderBy('gwa')
             ->paginate(50);
 
         $stats = [
             'total' => Student::where('academic_standing', 'Dean\'s Lister')->count(),
-            'average_gpa' => Student::where('academic_standing', 'Dean\'s Lister')
-                ->avg('gpa'),
+            'average_gwa' => Student::where('academic_standing', 'Dean\'s Lister')
+                ->avg('gwa'),
         ];
 
         return view('admin.reports.deans-list', compact('students', 'stats'));

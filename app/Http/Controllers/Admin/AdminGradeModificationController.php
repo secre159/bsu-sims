@@ -5,16 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Enrollment;
 use App\Models\GradeHistory;
-use App\Services\GpaCalculationService;
+use App\Services\GwaCalculationService;
 use Illuminate\Http\Request;
 
 class AdminGradeModificationController extends Controller
 {
-    private GpaCalculationService $gpaService;
+    private GwaCalculationService $gwaService;
 
-    public function __construct(GpaCalculationService $gpaService)
+    public function __construct(GwaCalculationService $gwaService)
     {
-        $this->gpaService = $gpaService;
+        $this->gwaService = $gwaService;
     }
 
     /**
@@ -54,9 +54,18 @@ class AdminGradeModificationController extends Controller
                 return back()->with('info', 'Grade unchanged. No modification recorded.');
             }
 
+            // Determine enrollment status based on grade
+            $status = $enrollment->status;
+            if (is_numeric($newGrade)) {
+                $status = (float)$newGrade >= 4.0 ? 'Failed' : 'Completed';
+            } elseif (in_array($newGrade, ['IP', 'INC'])) {
+                $status = 'Enrolled'; // Still in progress
+            }
+
             // Update enrollment
             $enrollment->update([
                 'grade' => $newGrade,
+                'status' => $status,
                 'updated_at' => now(),
             ]);
 
@@ -69,11 +78,11 @@ class AdminGradeModificationController extends Controller
                 'reason' => 'Admin Modified: ' . $validated['reason'],
             ]);
 
-            // Recalculate student GPA
-            $this->gpaService->updateStudentStanding($enrollment->student);
+            // Recalculate student GWA
+            $this->gwaService->updateStudentStanding($enrollment->student);
 
             return redirect()->route('admin.grade-modifications.edit', $enrollment)
-                ->with('success', "Grade updated from {$oldGrade} to {$newGrade}. Student GPA recalculated.");
+                ->with('success', "Grade updated from {$oldGrade} to {$newGrade}. Student GWA recalculated.");
         } catch (\Exception $e) {
             return back()->with('error', 'Error updating grade: ' . $e->getMessage());
         }

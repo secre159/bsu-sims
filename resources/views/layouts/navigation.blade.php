@@ -1,23 +1,43 @@
-<nav x-data="{ open: false }" class="bg-brand-deep border-b border-brand-deep shadow-sm text-white">
+<nav x-data="{ open: false }" class="hero-bg shadow-lg sticky top-0 z-50">
+    <!-- Subtle overlay for better text contrast -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent pointer-events-none"></div>
+    
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-<x-application-logo class="block h-9 w-auto fill-current text-white" />
-                    </a>
-                </div>
+    <div class="px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+            <!-- Left: Logo & Brand -->
+            <div class="shrink-0 flex items-center relative z-10">
+                <a href="{{ route('dashboard') }}" class="flex items-center gap-3 group">
+                    @if(file_exists(public_path('images/bsu-logo.png')))
+                        <img src="{{ asset('images/bsu-logo.png') }}" alt="BSU-Bokod" class="w-10 h-10 object-contain drop-shadow-lg">
+                    @else
+                        <div class="w-10 h-10 bg-gradient-to-br from-emerald-400 to-teal-400 rounded-xl flex items-center justify-center shadow-lg">
+                            <svg class="w-6 h-6 text-gray-900" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"></path>
+                            </svg>
+                        </div>
+                    @endif
+                    <div class="flex flex-col">
+                        <span class="text-base font-bold text-white group-hover:text-emerald-300 transition-colors drop-shadow-lg leading-tight">
+                            BSU-Bokod
+                        </span>
+                        <span class="text-[10px] text-emerald-300 font-medium uppercase tracking-wider leading-tight">
+                            Student System
+                        </span>
+                    </div>
+                </a>
+            </div>
 
+            <!-- Right: Navigation Links + User Controls -->
+            <div class="hidden sm:flex sm:items-center sm:gap-8">
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="flex space-x-1 relative z-10">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     
-                    @if(in_array(Auth::user()->role, ['admin', 'approver', 'user', null]))
-                        {{-- Admin/Staff Navigation --}}
+                    @if(Auth::user()->role === 'admin')
+                        {{-- Admin Navigation --}}
                         <x-nav-link :href="route('students.index')" :active="request()->routeIs('students.*')">
                             {{ __('Students') }}
                         </x-nav-link>
@@ -45,7 +65,12 @@
                         <x-nav-link :href="route('archive.index')" :active="request()->routeIs('archive.*')">
                             {{ __('Archives') }}
                         </x-nav-link>
-                        @if(in_array(Auth::user()->role, ['admin', null]))
+                        @if(Auth::user()->role === 'admin')
+                            <x-nav-link :href="route('backups.index')" :active="request()->routeIs('backups.*')">
+                                {{ __('Backups') }}
+                            </x-nav-link>
+                        @endif
+                        @if(Auth::user()->role === 'admin')
                             <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
                                 {{ __('Users') }}
                             </x-nav-link>
@@ -63,15 +88,28 @@
                         <x-nav-link :href="route('chairperson.grade-batches.index')" :active="request()->routeIs('chairperson.grade-batches.*')">
                             {{ __('My Batches') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('chairperson.reports.index')" :active="request()->routeIs('chairperson.reports.*')">
+                            {{ __('Reports') }}
+                        </x-nav-link>
                     @endif
                 </div>
-            </div>
 
-            <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+                <!-- User Controls -->
+                <div class="flex items-center gap-3 relative z-10">
+                <!-- Role Badge -->
+                <span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-400 text-gray-900 shadow-lg">
+                    @if(Auth::user()->role === 'admin')
+                        👑 Admin
+                    @elseif(Auth::user()->role === 'chairperson')
+                        📋 Chairperson
+                    @else
+                        👤 Staff
+                    @endif
+                </span>
+                
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-<button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-transparent hover:bg-white\/10 focus:outline-none transition ease-in-out duration-150">
+                        <button class="inline-flex items-center px-4 py-2 border border-white/30 text-sm leading-4 font-semibold rounded-lg text-white hover:bg-white/10 hover:border-emerald-400 focus:outline-none transition-all duration-150 backdrop-blur-sm bg-white/5">
                             <div>{{ Auth::user()->name }}</div>
 
                             <div class="ms-1">
@@ -99,11 +137,12 @@
                         </form>
                     </x-slot>
                 </x-dropdown>
+                </div>
             </div>
 
-            <!-- Hamburger -->
-<div class="-me-2 flex items-center sm:hidden text-white">
-<button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-white hover:bg-white/10 focus:outline-none focus:bg-white/10 transition duration-150 ease-in-out">
+            <!-- Hamburger (Mobile) -->
+            <div class="flex items-center sm:hidden relative z-10">
+                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-lg text-white hover:text-emerald-300 hover:bg-white/10 focus:outline-none focus:bg-white/10 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -114,14 +153,14 @@
     </div>
 
     <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-brand-deep">
+    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden border-t border-white/10 bg-black/20 backdrop-blur-lg">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             
-            @if(in_array(Auth::user()->role, ['admin', 'approver', 'user', null]))
-                {{-- Admin/Staff Navigation --}}
+            @if(Auth::user()->role === 'admin')
+                {{-- Admin Navigation --}}
                 <x-responsive-nav-link :href="route('students.index')" :active="request()->routeIs('students.*')">
                     {{ __('Students') }}
                 </x-responsive-nav-link>
@@ -149,7 +188,12 @@
                 <x-responsive-nav-link :href="route('archive.index')" :active="request()->routeIs('archive.*')">
                     {{ __('Archives') }}
                 </x-responsive-nav-link>
-                @if(in_array(Auth::user()->role, ['admin', null]))
+                @if(Auth::user()->role === 'admin')
+                    <x-responsive-nav-link :href="route('backups.index')" :active="request()->routeIs('backups.*')">
+                        {{ __('Backups') }}
+                    </x-responsive-nav-link>
+                @endif
+                @if(Auth::user()->role === 'admin')
                     <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.*')">
                         {{ __('Users') }}
                     </x-responsive-nav-link>
@@ -167,14 +211,17 @@
                 <x-responsive-nav-link :href="route('chairperson.grade-batches.index')" :active="request()->routeIs('chairperson.grade-batches.*')">
                     {{ __('My Batches') }}
                 </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('chairperson.reports.index')" :active="request()->routeIs('chairperson.reports.*')">
+                    {{ __('Reports') }}
+                </x-responsive-nav-link>
             @endif
         </div>
 
         <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-brand-light">
-            <div class="px-4">
-                <div class="font-medium text-base text-white">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-white/70">{{ Auth::user()->email }}</div>
+        <div class="pt-4 pb-1 border-t border-white/10">
+            <div class="px-4 py-2">
+                <div class="font-semibold text-sm text-white">{{ Auth::user()->name }}</div>
+                <div class="font-medium text-xs text-emerald-300">{{ Auth::user()->email }}</div>
             </div>
 
             <div class="mt-3 space-y-1">

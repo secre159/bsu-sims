@@ -1,4 +1,5 @@
 <x-app-layout>
+    <x-slot name="title">Add Student</x-slot>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Add New Student') }}
@@ -122,9 +123,15 @@
                                     <input type="text" name="mother_contact_number" value="{{ old('mother_contact_number') }}" class="w-full border rounded px-3 py-2">
                                 </div>
                             </div>
-                            <div>
-                                <label class="block text-sm font-medium mb-2">Father's Contact Number</label>
-                                <input type="text" name="father_contact_number" value="{{ old('father_contact_number') }}" class="w-full border rounded px-3 py-2">
+                            <div class="grid grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Father's Name</label>
+                                    <input type="text" name="father_name" value="{{ old('father_name') }}" class="w-full border rounded px-3 py-2">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium mb-2">Father's Contact Number</label>
+                                    <input type="text" name="father_contact_number" value="{{ old('father_contact_number') }}" class="w-full border rounded px-3 py-2">
+                                </div>
                             </div>
                             <div class="mt-4 grid grid-cols-2 gap-4">
                                 <div>

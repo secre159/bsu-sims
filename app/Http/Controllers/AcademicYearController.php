@@ -31,20 +31,36 @@ class AcademicYearController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        // Manually validate and clean date fields
+        $rules = [
             'year_code' => 'required|max:20|unique:academic_years,year_code',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
-            'registration_start_date' => 'nullable|date',
-            'registration_end_date' => 'nullable|date|after_or_equal:registration_start_date',
-            'add_drop_deadline' => 'nullable|date',
-            'classes_start_date' => 'nullable|date',
-            'classes_end_date' => 'nullable|date|after_or_equal:classes_start_date',
-            'midterm_start_date' => 'nullable|date',
-            'midterm_end_date' => 'nullable|date|after_or_equal:midterm_start_date',
-            'exam_start_date' => 'nullable|date',
-            'exam_end_date' => 'nullable|date|after_or_equal:exam_start_date',
-        ]);
+        ];
+        
+        // Optional date fields - only validate if not empty
+        $optionalDateFields = [
+            'registration_start_date', 'registration_end_date', 'add_drop_deadline',
+            'classes_start_date', 'classes_end_date',
+            'midterm_start_date', 'midterm_end_date',
+            'exam_start_date', 'exam_end_date'
+        ];
+        
+        foreach ($optionalDateFields as $field) {
+            $value = $request->input($field);
+            if (!empty($value) && $value !== null) {
+                $rules[$field] = 'date';
+            }
+        }
+
+        $validated = $request->validate($rules);
+        
+        // Add null values for empty optional date fields
+        foreach ($optionalDateFields as $field) {
+            if (!isset($validated[$field])) {
+                $validated[$field] = null;
+            }
+        }
 
         // Create both 1st and 2nd semester
         $semesters = ['1st Semester', '2nd Semester'];
@@ -94,21 +110,37 @@ class AcademicYearController extends Controller
      */
     public function update(Request $request, AcademicYear $academicYear)
     {
-        $validated = $request->validate([
+        // Manually validate and clean date fields
+        $rules = [
             'year_code' => 'required|max:20|unique:academic_years,year_code,' . $academicYear->id,
             'semester' => 'required|in:1st Semester,2nd Semester,Summer',
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
-            'registration_start_date' => 'nullable|date',
-            'registration_end_date' => 'nullable|date|after_or_equal:registration_start_date',
-            'add_drop_deadline' => 'nullable|date',
-            'classes_start_date' => 'nullable|date',
-            'classes_end_date' => 'nullable|date|after_or_equal:classes_start_date',
-            'midterm_start_date' => 'nullable|date',
-            'midterm_end_date' => 'nullable|date|after_or_equal:midterm_start_date',
-            'exam_start_date' => 'nullable|date',
-            'exam_end_date' => 'nullable|date|after_or_equal:exam_start_date',
-        ]);
+        ];
+        
+        // Optional date fields - only validate if not empty
+        $optionalDateFields = [
+            'registration_start_date', 'registration_end_date', 'add_drop_deadline',
+            'classes_start_date', 'classes_end_date',
+            'midterm_start_date', 'midterm_end_date',
+            'exam_start_date', 'exam_end_date'
+        ];
+        
+        foreach ($optionalDateFields as $field) {
+            $value = $request->input($field);
+            if (!empty($value) && $value !== null) {
+                $rules[$field] = 'date';
+            }
+        }
+
+        $validated = $request->validate($rules);
+        
+        // Add null values for empty optional date fields
+        foreach ($optionalDateFields as $field) {
+            if (!isset($validated[$field])) {
+                $validated[$field] = null;
+            }
+        }
 
         $original = $academicYear->getOriginal();
         $academicYear->update($validated);

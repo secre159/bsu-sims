@@ -18,9 +18,9 @@
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
                     <p class="text-xs text-gray-500 uppercase tracking-wide font-medium">Status</p>
                     <span class="inline-block px-3 py-1 text-xs rounded-full font-medium mt-1
-                        @if($batch->status == 'pending') bg-yellow-100 text-yellow-800
+                        @if(in_array($batch->status, ['pending', 'ready'])) bg-amber-100 text-amber-800
                         @elseif($batch->status == 'submitted') bg-blue-100 text-blue-800
-                        @elseif($batch->status == 'approved') bg-green-100 text-green-800
+                        @elseif($batch->status == 'approved') bg-emerald-100 text-emerald-800
                         @elseif($batch->status == 'rejected') bg-red-100 text-red-800
                         @else bg-gray-100 text-gray-800 @endif">
                         {{ ucfirst($batch->status) }}
@@ -100,33 +100,33 @@
                     ← Back to Batches
                 </a>
                 <div class="flex gap-3">
-                    @if($batch->status == 'pending' && $errorCount < $batch->total_records)
+                    @if(in_array($batch->status, ['pending', 'ready']) && $errorCount < $batch->total_records)
                         <form action="{{ route('chairperson.grade-import.submit', $batch) }}" method="POST" class="inline">
                             @csrf
                             <button type="submit" 
-                                    class="px-6 py-2 bg-gradient-to-r from-brand-deep to-brand-medium hover:from-brand-medium hover:to-brand-light text-white rounded-lg font-medium">
+                                    class="px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all">
                                 Submit for Approval
                             </button>
                         </form>
                     @endif
                     
-                    @if($batch->status == 'pending' && $errorCount > 0)
+                    @if(in_array($batch->status, ['pending', 'ready']) && $errorCount > 0)
                         <form action="{{ route('chairperson.grade-batches.retry', $batch) }}" method="POST" class="inline">
                             @csrf
                             <button type="submit" 
-                                    class="px-6 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg font-medium">
+                                    class="px-6 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all">
                                 Retry Failed Records
                             </button>
                         </form>
                     @endif
                     
-                    @if($batch->status == 'pending')
+                    @if(in_array($batch->status, ['pending', 'ready']))
                         <form action="{{ route('chairperson.grade-batches.destroy', $batch) }}" method="POST" class="inline">
                             @csrf
                             @method('DELETE')
                             <button type="submit" 
                                     onclick="return confirm('Delete this batch?')"
-                                    class="px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium">
+                                    class="px-6 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg font-medium shadow-md hover:shadow-lg transition-all">
                                 Delete
                             </button>
                         </form>

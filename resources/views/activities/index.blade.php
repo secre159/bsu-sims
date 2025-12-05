@@ -1,4 +1,5 @@
 <x-app-layout>
+    <x-slot name="title">Activity Log</x-slot>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Activity Log') }}
@@ -27,9 +28,19 @@
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Action</label>
                         <select name="action" class="w-full rounded-xl border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
                             <option value="">All Actions</option>
-                            <option value="created" {{ request('action') == 'created' ? 'selected' : '' }}>Created</option>
-                            <option value="updated" {{ request('action') == 'updated' ? 'selected' : '' }}>Updated</option>
-                            <option value="deleted" {{ request('action') == 'deleted' ? 'selected' : '' }}>Deleted</option>
+                            <optgroup label="Student Management">
+                                <option value="created" {{ request('action') == 'created' ? 'selected' : '' }}>Created</option>
+                                <option value="updated" {{ request('action') == 'updated' ? 'selected' : '' }}>Updated</option>
+                                <option value="deleted" {{ request('action') == 'deleted' ? 'selected' : '' }}>Deleted</option>
+                            </optgroup>
+                            <optgroup label="Grade Management">
+                                <option value="grade_entered" {{ request('action') == 'grade_entered' ? 'selected' : '' }}>Grade Entered</option>
+                                <option value="grade_modified" {{ request('action') == 'grade_modified' ? 'selected' : '' }}>Grade Modified</option>
+                                <option value="bulk_grade_update" {{ request('action') == 'bulk_grade_update' ? 'selected' : '' }}>Bulk Grade Update</option>
+                                <option value="grade_batch_submitted" {{ request('action') == 'grade_batch_submitted' ? 'selected' : '' }}>Batch Submitted</option>
+                                <option value="grade_batch_approved" {{ request('action') == 'grade_batch_approved' ? 'selected' : '' }}>Batch Approved</option>
+                                <option value="grade_batch_rejected" {{ request('action') == 'grade_batch_rejected' ? 'selected' : '' }}>Batch Rejected</option>
+                            </optgroup>
                         </select>
                     </div>
 
@@ -79,10 +90,22 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                         </svg>
                                     </div>
-                                @else
+                                @elseif($activity->action === 'deleted')
                                     <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
                                         <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                        </svg>
+                                    </div>
+                                @elseif(str_contains($activity->action, 'grade'))
+                                    <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                                        </svg>
+                                    </div>
+                                @else
+                                    <div class="w-10 h-10 bg-gray-100 rounded-full flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                         </svg>
                                     </div>
                                 @endif
@@ -102,8 +125,12 @@
                                     <span class="px-3 py-1 text-xs font-semibold rounded-full
                                         @if($activity->action === 'created') bg-green-100 text-green-800
                                         @elseif($activity->action === 'updated') bg-blue-100 text-blue-800
-                                        @else bg-red-100 text-red-800 @endif">
-                                        {{ ucfirst($activity->action) }}
+                                        @elseif($activity->action === 'deleted') bg-red-100 text-red-800
+                                        @elseif(str_contains($activity->action, 'approved')) bg-emerald-100 text-emerald-800
+                                        @elseif(str_contains($activity->action, 'rejected')) bg-red-100 text-red-800
+                                        @elseif(str_contains($activity->action, 'grade')) bg-purple-100 text-purple-800
+                                        @else bg-gray-100 text-gray-800 @endif">
+                                        {{ ucfirst(str_replace('_', ' ', $activity->action)) }}
                                     </span>
                                 </div>
 

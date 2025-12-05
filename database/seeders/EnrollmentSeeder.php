@@ -15,13 +15,21 @@ class EnrollmentSeeder extends Seeder
      */
     public function run(): void
     {
-        // Prefer the current academic year; fallback to any 2024-2025 year
-        $currentAcademicYear = AcademicYear::where('is_current', true)->first();
-        if (!$currentAcademicYear) {
-            $currentAcademicYear = AcademicYear::where('year_code', 'LIKE', '2024-2025%')->first();
+        // Get both 1st and 2nd semester academic years
+        $firstSemester = AcademicYear::where('semester', '1st Semester')
+            ->where('is_current', true)
+            ->first();
+        
+        if (!$firstSemester) {
+            $firstSemester = AcademicYear::where('semester', '1st Semester')->first();
         }
-        if (!$currentAcademicYear) {
-            echo "\n[EnrollmentSeeder] Warning: No active academic year found. Skipping enrollment seeding.\n";
+        
+        $secondSemester = AcademicYear::where('semester', '2nd Semester')
+            ->where('year_code', 'LIKE', $firstSemester ? substr($firstSemester->year_code, 0, 9) . '%' : '%')
+            ->first();
+        
+        if (!$firstSemester) {
+            echo "\n[EnrollmentSeeder] Warning: No 1st semester academic year found. Skipping enrollment seeding.\n";
             return;
         }
 
@@ -45,26 +53,32 @@ class EnrollmentSeeder extends Seeder
             $selectedSubjects = $availableSubjects->random(min($enrollmentCount, $availableSubjects->count()));
 
             foreach ($selectedSubjects as $subject) {
+                // Determine correct academic year based on subject's semester
+                $academicYearForSubject = $firstSemester; // Default to 1st semester
+                
+                if ($subject->semester === '2nd Semester' && $secondSemester) {
+                    $academicYearForSubject = $secondSemester;
+                }
+                
                 // Check if already enrolled
                 $existingEnrollment = Enrollment::where('student_id', $student->id)
                     ->where('subject_id', $subject->id)
-                    ->where('academic_year_id', $currentAcademicYear->id)
+                    ->where('academic_year_id', $academicYearForSubject->id)
                     ->exists();
 
                 if ($existingEnrollment) {
                     continue;
                 }
 
-                // Current semester: Enrolled, NO GRADE YET
-                // In real system, grades are only entered AFTER course completion
-                // Status must be "Enrolled" or "Completed" with actual course performance
+                // Enroll in appropriate semester based on subject
+                // Status: "Enrolled" - no grades yet (grades entered later)
                 Enrollment::create([
                     'student_id' => $student->id,
                     'subject_id' => $subject->id,
-                    'academic_year_id' => $currentAcademicYear->id,
-                    'status' => 'Enrolled',      // Only "Enrolled" - no grades yet
-                    'grade' => null,             // No grade until semester ends
-                    'remarks' => null,           // No remarks yet
+                    'academic_year_id' => $academicYearForSubject->id,
+                    'status' => 'Enrolled',
+                    'grade' => null,
+                    'remarks' => null,
                 ]);
             }
         }

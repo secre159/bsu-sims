@@ -103,6 +103,15 @@ class ArchiveController extends Controller
             $studentData = $archived->student_data;
             unset($studentData['id']); // Remove old ID to avoid conflicts
             
+            // Check if student with this student_id already exists
+            $existingStudent = Student::where('student_id', $studentData['student_id'])->first();
+            
+            if ($existingStudent) {
+                DB::rollBack();
+                return back()->with('error', 'Cannot restore: A student with ID "' . $studentData['student_id'] . '" already exists in the active records.');
+            }
+            
+            // Create the student record
             Student::create($studentData);
             
             // Delete from archive

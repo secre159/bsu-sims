@@ -1,151 +1,163 @@
 <x-app-layout>
-    <x-slot name="header">
-        <div class="flex justify-between items-center">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Student Archives') }}
-            </h2>
-            <a href="{{ route('archive.create') }}" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
-                Archive School Year
-            </a>
-        </div>
-    </x-slot>
+    <x-slot name="title">Student Archives</x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <!-- Enhanced Info Box with Description and Instructions - 2 Column Layout -->
-            <div class="mb-6 grid grid-cols-1 lg:grid-cols-2 gap-4" x-data="{ showDescription: false, showInstructions: false }">
-                <!-- Description Card -->
-                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-l-4 border-indigo-500 rounded-xl shadow-sm overflow-hidden">
-                    <button @click="showDescription = !showDescription" class="w-full p-6 flex items-center justify-between hover:bg-blue-100/50 transition-colors duration-200">
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 text-indigo-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <div class="py-8">
+        <div class="px-4 sm:px-6 lg:px-8">
+            <!-- Premium Header with Gradient -->
+            <div class="mb-8 relative overflow-hidden rounded-2xl bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 p-8 shadow-2xl">
+                <div class="absolute inset-0 bg-black opacity-10"></div>
+                <div class="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white opacity-10"></div>
+                <div class="absolute -left-10 -bottom-10 h-40 w-40 rounded-full bg-white opacity-10"></div>
+                
+                <div class="relative flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="p-2 bg-white/20 backdrop-blur-sm rounded-lg">
+                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
+                                </svg>
+                            </div>
+                            <h1 class="text-3xl font-bold text-white drop-shadow-lg">Student Archives</h1>
+                        </div>
+                        <p class="text-orange-100 ml-14">Preserve historical records and manage semester snapshots</p>
+                    </div>
+                    <a href="{{ route('archive.create') }}" 
+                       class="inline-flex items-center px-5 py-3 bg-white hover:bg-orange-50 text-orange-700 font-semibold rounded-xl shadow-lg hover:shadow-2xl transform hover:scale-105 transition-all duration-200">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        Archive School Year
+                    </a>
+                </div>
+            </div>
+            <!-- Tabbed Info Panel -->
+            <div class="mb-8 bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden" x-data="{ activeTab: 'about' }">
+                <!-- Tab Buttons -->
+                <div class="flex border-b border-gray-200 bg-gradient-to-r from-gray-50 to-white">
+                    <button @click="activeTab = 'about'" 
+                            :class="activeTab === 'about' ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300'"
+                            class="flex-1 py-4 px-6 text-center border-b-2 font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2">
+                        <div :class="activeTab === 'about' ? 'bg-gradient-to-br from-indigo-500 to-indigo-600' : 'bg-gray-400'" 
+                             class="p-1.5 rounded-lg transition-all duration-200">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                             </svg>
-                            <h3 class="font-bold text-gray-800 text-lg">📚 About Student Archives</h3>
                         </div>
-                        <svg :class="showDescription ? 'rotate-180' : ''" class="w-5 h-5 text-indigo-600 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
+                        <span>📚 About Archives</span>
                     </button>
-                    <div x-show="showDescription" 
-                         x-transition:enter="transition ease-out duration-300"
-                         x-transition:enter-start="opacity-0 transform -translate-y-2"
-                         x-transition:enter-end="opacity-100 transform translate-y-0"
-                         x-transition:leave="transition ease-in duration-200"
-                         x-transition:leave-start="opacity-100 transform translate-y-0"
-                         x-transition:leave-end="opacity-0 transform -translate-y-2"
-                         class="px-6 pb-6">
-                        <div class="flex items-start">
-                            <div class="flex-1">
-                            <p class="text-sm text-gray-700 leading-relaxed mb-2">
-                                The Archive System is a comprehensive data preservation tool designed to maintain historical student records for long-term storage and compliance. 
-                                This feature creates permanent snapshots of student data at specific points in time (by school year and semester), enabling your institution to:
-                            </p>
-                            <ul class="text-sm text-gray-700 space-y-1 ml-4">
-                                <li class="flex items-start">
-                                    <span class="text-indigo-600 mr-2">•</span>
-                                    <span><strong>Preserve historical records</strong> for reporting, audits, and compliance requirements</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <span class="text-indigo-600 mr-2">•</span>
-                                    <span><strong>Clean active student lists</strong> at the end of academic periods while retaining data</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <span class="text-indigo-600 mr-2">•</span>
-                                    <span><strong>Restore student records</strong> if needed for re-enrollment or data recovery</span>
-                                </li>
-                                <li class="flex items-start">
-                                    <span class="text-indigo-600 mr-2">•</span>
-                                    <span><strong>Maintain audit trails</strong> with timestamps and reasons for archiving</span>
-                                </li>
-                            </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Instructions Card -->
-                <div class="bg-gradient-to-r from-green-50 to-emerald-50 border-l-4 border-green-500 rounded-xl shadow-sm overflow-hidden">
-                    <button @click="showInstructions = !showInstructions" class="w-full p-6 flex items-center justify-between hover:bg-green-100/50 transition-colors duration-200">
-                        <div class="flex items-center">
-                            <svg class="w-6 h-6 text-green-600 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <button @click="activeTab = 'guide'" 
+                            :class="activeTab === 'guide' ? 'border-emerald-600 text-emerald-600' : 'border-transparent text-gray-600 hover:text-gray-900 hover:border-gray-300'"
+                            class="flex-1 py-4 px-6 text-center border-b-2 font-semibold text-sm transition-all duration-200 flex items-center justify-center gap-2">
+                        <div :class="activeTab === 'guide' ? 'bg-gradient-to-br from-emerald-500 to-emerald-600' : 'bg-gray-400'" 
+                             class="p-1.5 rounded-lg transition-all duration-200">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
                             </svg>
-                            <h3 class="font-bold text-gray-800 text-lg">📋 How to Use Archives</h3>
                         </div>
-                        <svg :class="showInstructions ? 'rotate-180' : ''" class="w-5 h-5 text-green-600 transform transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                        </svg>
+                        <span>📋 How to Use</span>
                     </button>
-                    <div x-show="showInstructions" 
+                </div>
+
+                <!-- Tab Content -->
+                <div class="p-8">
+                    <!-- About Tab -->
+                    <div x-show="activeTab === 'about'" 
                          x-transition:enter="transition ease-out duration-300"
-                         x-transition:enter-start="opacity-0 transform -translate-y-2"
-                         x-transition:enter-end="opacity-100 transform translate-y-0"
-                         x-transition:leave="transition ease-in duration-200"
-                         x-transition:leave-start="opacity-100 transform translate-y-0"
-                         x-transition:leave-end="opacity-0 transform -translate-y-2"
-                         class="px-6 pb-6">
-                        <div class="flex items-start">
-                            <div class="flex-1">
-                            
-                            <div class="space-y-3">
-                                <div class="bg-white rounded-lg p-4 shadow-sm">
-                                    <div class="flex items-start">
-                                        <div class="flex-shrink-0 w-7 h-7 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-sm mr-3 mt-0.5">
-                                            1
-                                        </div>
-                                        <div>
-                                            <h4 class="font-semibold text-gray-800 text-sm">Create Archive</h4>
-                                            <p class="text-sm text-gray-600 mt-1">Click "Archive School Year" button, select the school year and semester, optionally provide a reason, then submit to create a snapshot of all current students.</p>
-                                        </div>
-                                    </div>
+                         x-transition:enter-start="opacity-0 transform translate-x-4"
+                         x-transition:enter-end="opacity-100 transform translate-x-0">
+                        <p class="text-sm text-gray-700 leading-relaxed mb-4">
+                            The Archive System is a comprehensive data preservation tool designed to maintain historical student records for long-term storage and compliance. 
+                            This feature creates permanent snapshots of student data at specific points in time (by school year and semester), enabling your institution to:
+                        </p>
+                        <ul class="text-sm text-gray-700 space-y-3 ml-2">
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 w-6 h-6 bg-indigo-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                    <svg class="w-3 h-3 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
                                 </div>
-
-                                <div class="bg-white rounded-lg p-4 shadow-sm">
-                                    <div class="flex items-start">
-                                        <div class="flex-shrink-0 w-7 h-7 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-sm mr-3 mt-0.5">
-                                            2
-                                        </div>
-                                        <div>
-                                            <h4 class="font-semibold text-gray-800 text-sm">View Archives</h4>
-                                            <p class="text-sm text-gray-600 mt-1">Browse archived school years below. Each card shows the total number of archived students. Click "View Archive" to see detailed student records.</p>
-                                        </div>
-                                    </div>
+                                <span><strong class="text-indigo-700">Preserve historical records</strong> for reporting, audits, and compliance requirements</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 w-6 h-6 bg-indigo-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                    <svg class="w-3 h-3 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
                                 </div>
-
-                                <div class="bg-white rounded-lg p-4 shadow-sm">
-                                    <div class="flex items-start">
-                                        <div class="flex-shrink-0 w-7 h-7 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-sm mr-3 mt-0.5">
-                                            3
-                                        </div>
-                                        <div>
-                                            <h4 class="font-semibold text-gray-800 text-sm">Restore Students</h4>
-                                            <p class="text-sm text-gray-600 mt-1">Inside an archive, you can restore individual students back to the active student list by clicking the "Restore" button next to their record.</p>
-                                        </div>
-                                    </div>
+                                <span><strong class="text-indigo-700">Clean active student lists</strong> at the end of academic periods while retaining data</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 w-6 h-6 bg-indigo-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                    <svg class="w-3 h-3 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
                                 </div>
+                                <span><strong class="text-indigo-700">Restore student records</strong> if needed for re-enrollment or data recovery</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="flex-shrink-0 w-6 h-6 bg-indigo-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                                    <svg class="w-3 h-3 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <span><strong class="text-indigo-700">Maintain audit trails</strong> with timestamps and reasons for archiving</span>
+                            </li>
+                        </ul>
+                    </div>
 
-                                <div class="bg-white rounded-lg p-4 shadow-sm">
-                                    <div class="flex items-start">
-                                        <div class="flex-shrink-0 w-7 h-7 bg-green-600 text-white rounded-full flex items-center justify-center font-bold text-sm mr-3 mt-0.5">
-                                            4
-                                        </div>
-                                        <div>
-                                            <h4 class="font-semibold text-gray-800 text-sm">Delete Archives</h4>
-                                            <p class="text-sm text-gray-600 mt-1">When an archive is no longer needed (after data retention period expires), use the delete button (trash icon) to permanently remove the entire archive batch.</p>
-                                        </div>
-                                    </div>
+                    <!-- Guide Tab -->
+                    <div x-show="activeTab === 'guide'" 
+                         x-transition:enter="transition ease-out duration-300"
+                         x-transition:enter-start="opacity-0 transform translate-x-4"
+                         x-transition:enter-end="opacity-100 transform translate-x-0">
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4 p-4 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl border border-emerald-200">
+                                <div class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md">
+                                    1
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 text-sm mb-1">Create Archive</h4>
+                                    <p class="text-sm text-gray-700">Click "Archive School Year" button, select the school year and semester, optionally provide a reason, then submit to create a snapshot of all current students.</p>
                                 </div>
                             </div>
 
-                            <div class="mt-4 bg-amber-50 border border-amber-200 rounded-lg p-3">
-                                <p class="text-xs text-amber-800 flex items-start">
-                                    <svg class="w-4 h-4 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                            <div class="flex items-start gap-4 p-4 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl border border-emerald-200">
+                                <div class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md">
+                                    2
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 text-sm mb-1">View Archives</h4>
+                                    <p class="text-sm text-gray-700">Browse archived school years below. Each card shows the total number of archived students. Click "View Archive" to see detailed student records.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4 p-4 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl border border-emerald-200">
+                                <div class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md">
+                                    3
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 text-sm mb-1">Restore Students</h4>
+                                    <p class="text-sm text-gray-700">Inside an archive, you can restore individual students back to the active student list by clicking the "Restore" button next to their record.</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4 p-4 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl border border-emerald-200">
+                                <div class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-emerald-500 to-emerald-600 text-white rounded-full flex items-center justify-center font-bold text-sm shadow-md">
+                                    4
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-900 text-sm mb-1">Delete Archives</h4>
+                                    <p class="text-sm text-gray-700">When an archive is no longer needed (after data retention period expires), use the delete button (trash icon) to permanently remove the entire archive batch.</p>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 p-4 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-xl">
+                                <p class="text-xs text-amber-900 flex items-start gap-2">
+                                    <svg class="w-4 h-4 flex-shrink-0 mt-0.5 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
                                     </svg>
                                     <span><strong>Tip:</strong> We recommend archiving at the end of each semester or academic year. When creating an archive, you can optionally delete active students to start fresh for the new period.</span>
                                 </p>
-                            </div>
                             </div>
                         </div>
                     </div>

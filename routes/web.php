@@ -17,15 +17,17 @@ use App\Http\Controllers\Student\StudentEnrollmentController;
 use App\Http\Controllers\Chairperson\GradeController;
 use App\Http\Controllers\Chairperson\GradeImportController;
 use App\Http\Controllers\Chairperson\GradeBatchController;
+use App\Http\Controllers\Chairperson\ChairpersonDashboardController;
+use App\Http\Controllers\Chairperson\ChairpersonReportController;
 use App\Http\Controllers\Admin\AdminGradeApprovalController;
 use App\Http\Controllers\Admin\AdminGradeModificationController;
 use App\Http\Controllers\Admin\GradeReportController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-// Redirect root to dashboard
+// Landing page - show portal selection
 Route::get('/', function () {
-    return redirect()->route('dashboard');
+    return view('welcome');
 });
 
 // Student Portal Routes
@@ -41,8 +43,13 @@ Route::prefix('student')->name('student.')->group(function () {
 
 // Protected routes - require authentication
 Route::middleware(['auth', 'verified'])->group(function () {
-    // Dashboard (all authenticated users)
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // Dashboard - route to appropriate dashboard based on role
+    Route::get('/dashboard', function () {
+        if (auth()->user()->role === 'chairperson') {
+            return redirect()->route('chairperson.dashboard');
+        }
+        return app(DashboardController::class)->index();
+    })->name('dashboard');
 
     // Profile Management (all authenticated users)
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -79,8 +86,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // Reports
         Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
         Route::get('/reports/students', [ReportController::class, 'studentsList'])->name('reports.students');
+        Route::get('/reports/students/pdf', [ReportController::class, 'studentsListPdf'])->name('reports.students.pdf');
         Route::get('/reports/programs', [ReportController::class, 'programsList'])->name('reports.programs');
+        Route::get('/reports/programs/pdf', [ReportController::class, 'programsListPdf'])->name('reports.programs.pdf');
         Route::get('/reports/year-levels', [ReportController::class, 'yearLevelsList'])->name('reports.year-levels');
+        Route::get('/reports/year-levels/pdf', [ReportController::class, 'yearLevelsListPdf'])->name('reports.year-levels.pdf');
         Route::get('/reports/export-students', [ReportController::class, 'exportStudents'])->name('reports.export-students');
 
         // Activity Log
@@ -96,6 +106,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/archive/{schoolYear}/{semester}', [App\Http\Controllers\ArchiveController::class, 'show'])->name('archive.show');
         Route::post('/archive/restore/{id}', [App\Http\Controllers\ArchiveController::class, 'restore'])->name('archive.restore');
         Route::delete('/archive/{schoolYear}/{semester}', [App\Http\Controllers\ArchiveController::class, 'destroy'])->name('archive.destroy');
+
+        // Backup Management
+        Route::get('/backups', [App\Http\Controllers\BackupController::class, 'index'])->name('backups.index');
+        Route::post('/backups', [App\Http\Controllers\BackupController::class, 'store'])->name('backups.store');
+        Route::get('/backups/{backup}/download', [App\Http\Controllers\BackupController::class, 'download'])->name('backups.download');
+        Route::post('/backups/{backup}/restore', [App\Http\Controllers\BackupController::class, 'restore'])->name('backups.restore');
+        Route::delete('/backups/{backup}', [App\Http\Controllers\BackupController::class, 'destroy'])->name('backups.destroy');
+        Route::post('/backups/cleanup', [App\Http\Controllers\BackupController::class, 'cleanup'])->name('backups.cleanup');
 
         // Semester Transition Management
         Route::prefix('semester-transition')->name('semester-transition.')->group(function () {
@@ -135,6 +153,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Chairperson Routes
     Route::middleware('chairperson')->prefix('chairperson')->name('chairperson.')->group(function () {
+        // Dashboard
+        Route::get('/dashboard', [ChairpersonDashboardController::class, 'index'])->name('dashboard');
+        
         // Grade Management
         Route::prefix('grades')->name('grades.')->group(function () {
             Route::get('/', [GradeController::class, 'index'])->name('index');
@@ -155,6 +176,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         // Excel Import
         Route::prefix('grade-import')->name('grade-import.')->group(function () {
             Route::get('/create', [GradeImportController::class, 'create'])->name('create');
+            Route::get('/download-template/{subject}', [GradeImportController::class, 'downloadTemplate'])->name('download-template');
             Route::post('/', [GradeImportController::class, 'store'])->name('store');
             Route::post('/preview', [GradeImportController::class, 'preview'])->name('preview');
             Route::get('/preview/back', [GradeImportController::class, 'backToMapping'])->name('back-to-mapping');
@@ -168,6 +190,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('/{batch}', [GradeBatchController::class, 'show'])->name('show');
             Route::post('/{batch}/retry', [GradeBatchController::class, 'retry'])->name('retry');
             Route::delete('/{batch}', [GradeBatchController::class, 'destroy'])->name('destroy');
+        });
+        
+        // Reports
+        Route::prefix('reports')->name('reports.')->group(function () {
+            Route::get('/', [ChairpersonReportController::class, 'index'])->name('index');
+            Route::get('/students-list', [ChairpersonReportController::class, 'studentsList'])->name('students-list');
+            Route::get('/grades-summary', [ChairpersonReportController::class, 'gradesSummary'])->name('grades-summary');
+            Route::get('/irregular-students', [ChairpersonReportController::class, 'irregularStudents'])->name('irregular-students');
+            Route::get('/export-students', [ChairpersonReportController::class, 'exportStudents'])->name('export-students');
+            Route::get('/export-grades-summary', [ChairpersonReportController::class, 'exportGradesSummary'])->name('export-grades-summary');
         });
     });
 });

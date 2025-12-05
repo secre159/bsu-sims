@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Chairperson;
 
 use App\Http\Controllers\Controller;
+use App\Models\Activity;
 use App\Models\GradeImportBatch;
 use App\Models\GradeImportRecord;
 use App\Models\Enrollment;
+use App\Models\Subject;
 use App\Services\GradeImportService;
 use App\Services\ColumnMapper;
 use App\Services\GradeNormalizer;
@@ -27,7 +29,82 @@ class GradeImportController extends Controller
      */
     public function create()
     {
-        return view('chairperson.grades.import.create');
+        $chairperson = auth()->user();
+        
+        // Check pending batches limit (max 3)
+        $pendingBatchesCount = GradeImportBatch::where('chairperson_id', $chairperson->id)
+            ->whereIn('status', ['pending', 'ready'])
+            ->count();
+        
+        if ($pendingBatchesCount >= 3) {
+            return redirect()->route('chairperson.grade-batches.index')
+                ->with('error', 'You have reached the maximum limit of 3 pending batches. Please submit or delete existing batches before creating a new import.');
+        }
+        
+        $subjects = Subject::where('department_id', $chairperson->department_id)
+            ->where('is_active', true)
+            ->orderBy('code')
+            ->get();
+        
+        return view('chairperson.grades.import.create', compact('subjects', 'pendingBatchesCount'));
+    }
+    
+    /**
+     * Download pre-populated CSV template for a subject
+     */
+    public function downloadTemplate(Request $request, Subject $subject)
+    {
+        $chairperson = auth()->user();
+        
+        // Verify subject belongs to chairperson's department
+        if ($subject->department_id !== $chairperson->department_id) {
+            abort(403, 'You cannot access this subject.');
+        }
+        
+        // Get all enrollments for this subject
+        $enrollments = Enrollment::where('subject_id', $subject->id)
+            ->with(['student', 'academicYear'])
+            ->orderBy('student_id')
+            ->get();
+        
+        if ($enrollments->isEmpty()) {
+            return back()->with('error', 'No students are enrolled in this subject yet.');
+        }
+        
+        $filename = 'grade_template_' . $subject->code . '_' . date('Y-m-d') . '.csv';
+        
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+        ];
+        
+        $callback = function() use ($enrollments, $subject) {
+            $file = fopen('php://output', 'w');
+            
+            // CSV Headers
+            fputcsv($file, [
+                'student_id',
+                'student_name',
+                'subject_code',
+                'grade',
+                'remarks'
+            ]);
+            
+            // Data rows - pre-filled with student info, empty grade column
+            foreach ($enrollments as $enrollment) {
+                fputcsv($file, [
+                    $enrollment->student->student_id,
+                    $enrollment->student->last_name . ', ' . $enrollment->student->first_name,
+                    $subject->code,
+                    '', // Empty grade column for chairperson to fill
+                    '' // Empty remarks column
+                ]);
+            }
+            
+            fclose($file);
+        };
+        
+        return response()->stream($callback, 200, $headers);
     }
 
     /**
@@ -264,6 +341,22 @@ class GradeImportController extends Controller
             $batch->update([
                 'status' => 'submitted',
                 'submitted_at' => now(),
+            ]);
+
+            // Log batch submission activity
+            Activity::create([
+                'user_id' => $chairperson->id,
+                'subject_type' => GradeImportBatch::class,
+                'subject_id' => $batch->id,
+                'action' => 'grade_batch_submitted',
+                'description' => "Chairperson {$chairperson->name} submitted grade import batch '{$batch->file_name}' for admin approval",
+                'properties' => [
+                    'batch_id' => $batch->id,
+                    'file_name' => $batch->file_name,
+                    'total_records' => $batch->total_records,
+                    'success_count' => $batch->success_count,
+                    'department_id' => $chairperson->department_id,
+                ],
             ]);
 
             return redirect()->route('chairperson.grade-batches.show', $batch)

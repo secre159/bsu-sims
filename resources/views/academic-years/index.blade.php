@@ -1,4 +1,5 @@
 <x-app-layout>
+    <x-slot name="title">Academic Years</x-slot>
     <style>
         dialog[open] {
             display: flex !important;
@@ -77,7 +78,7 @@
                             <li><strong>Set Current:</strong> Click "Set Current" to mark an academic year/semester as the active one.</li>
                             <li><strong>Transition Students:</strong> Use this at the end of each semester to calculate standings and auto-enroll promoted students into the next semester.</li>
                             <li><strong>During transition:</strong> Grades are evaluated → standing is updated (good, irregular, retained, probation) → enrollments for the next semester are created → the next semester is set as current.</li>
-                            <li><strong>Edit/Delete:</strong> Maintain academic year details from the Actions column.</li>
+                            <li><strong>Edit/Delete:</strong> Modify academic year dates or remove records from the Actions column.</li>
                         </ul>
                     </div>
                 </div>
@@ -88,7 +89,7 @@
                     @if ($academicYears->count() > 0)
                         <div class="overflow-x-auto">
                             <table class="w-full text-sm text-left text-gray-700">
-                                <thead class="bg-gradient-to-r from-brand-deep to-brand-medium border-b-2 border-brand-deep">
+                                <thead class="bg-gradient-to-r from-indigo-600 to-purple-600 border-b-2 border-indigo-700">
                                     <tr>
                                         <th class="px-4 py-3 font-bold text-white">Year Code</th>
                                         <th class="px-4 py-3 font-bold text-white">Semester</th>

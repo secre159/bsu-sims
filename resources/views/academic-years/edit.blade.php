@@ -1,4 +1,5 @@
 <x-app-layout>
+    <x-slot name="title">Edit Academic Year</x-slot>
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -47,14 +48,14 @@
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
                                     <label for="start_date" class="block text-sm font-medium text-gray-700 mb-2">Start Date *</label>
-                                    <input type="date" name="start_date" id="start_date" value="{{ old('start_date', $academicYear->start_date?->format('Y-m-d')) }}" required
+                                    <input type="date" name="start_date" id="start_date" value="{{ old('start_date', $academicYear->start_date ? \Carbon\Carbon::parse($academicYear->start_date)->format('Y-m-d') : '') }}" required
                                            class="w-full border rounded px-3 py-2 @error('start_date') border-red-500 @enderror">
                                     @error('start_date')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                                 </div>
 
                                 <div>
                                     <label for="end_date" class="block text-sm font-medium text-gray-700 mb-2">End Date *</label>
-                                    <input type="date" name="end_date" id="end_date" value="{{ old('end_date', $academicYear->end_date?->format('Y-m-d')) }}" required
+                                    <input type="date" name="end_date" id="end_date" value="{{ old('end_date', $academicYear->end_date ? \Carbon\Carbon::parse($academicYear->end_date)->format('Y-m-d') : '') }}" required
                                            class="w-full border rounded px-3 py-2 @error('end_date') border-red-500 @enderror">
                                     @error('end_date')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                                 </div>
@@ -67,21 +68,21 @@
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
                                     <label for="registration_start_date" class="block text-sm font-medium text-gray-700 mb-2">Registration Start</label>
-                                    <input type="date" name="registration_start_date" id="registration_start_date" value="{{ old('registration_start_date', $academicYear->registration_start_date?->format('Y-m-d')) }}"
+                                    <input type="date" name="registration_start_date" id="registration_start_date" value="{{ old('registration_start_date', $academicYear->registration_start_date ? \Carbon\Carbon::parse($academicYear->registration_start_date)->format('Y-m-d') : '') }}"
                                            class="w-full border rounded px-3 py-2 @error('registration_start_date') border-red-500 @enderror">
                                     @error('registration_start_date')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                                 </div>
 
                                 <div>
                                     <label for="registration_end_date" class="block text-sm font-medium text-gray-700 mb-2">Registration End</label>
-                                    <input type="date" name="registration_end_date" id="registration_end_date" value="{{ old('registration_end_date', $academicYear->registration_end_date?->format('Y-m-d')) }}"
+                                    <input type="date" name="registration_end_date" id="registration_end_date" value="{{ old('registration_end_date', $academicYear->registration_end_date ? \Carbon\Carbon::parse($academicYear->registration_end_date)->format('Y-m-d') : '') }}"
                                            class="w-full border rounded px-3 py-2 @error('registration_end_date') border-red-500 @enderror">
                                     @error('registration_end_date')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                                 </div>
 
                                 <div>
                                     <label for="add_drop_deadline" class="block text-sm font-medium text-gray-700 mb-2">Add/Drop Deadline</label>
-                                    <input type="date" name="add_drop_deadline" id="add_drop_deadline" value="{{ old('add_drop_deadline', $academicYear->add_drop_deadline?->format('Y-m-d')) }}"
+                                    <input type="date" name="add_drop_deadline" id="add_drop_deadline" value="{{ old('add_drop_deadline', $academicYear->add_drop_deadline ? \Carbon\Carbon::parse($academicYear->add_drop_deadline)->format('Y-m-d') : '') }}"
                                            class="w-full border rounded px-3 py-2 @error('add_drop_deadline') border-red-500 @enderror">
                                     @error('add_drop_deadline')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                                 </div>
@@ -94,14 +95,14 @@
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
                                     <label for="classes_start_date" class="block text-sm font-medium text-gray-700 mb-2">Classes Start</label>
-                                    <input type="date" name="classes_start_date" id="classes_start_date" value="{{ old('classes_start_date', $academicYear->classes_start_date?->format('Y-m-d')) }}"
+                                    <input type="date" name="classes_start_date" id="classes_start_date" value="{{ old('classes_start_date', $academicYear->classes_start_date ? \Carbon\Carbon::parse($academicYear->classes_start_date)->format('Y-m-d') : '') }}"
                                            class="w-full border rounded px-3 py-2 @error('classes_start_date') border-red-500 @enderror">
                                     @error('classes_start_date')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                                 </div>
 
                                 <div>
                                     <label for="classes_end_date" class="block text-sm font-medium text-gray-700 mb-2">Classes End</label>
-                                    <input type="date" name="classes_end_date" id="classes_end_date" value="{{ old('classes_end_date', $academicYear->classes_end_date?->format('Y-m-d')) }}"
+                                    <input type="date" name="classes_end_date" id="classes_end_date" value="{{ old('classes_end_date', $academicYear->classes_end_date ? \Carbon\Carbon::parse($academicYear->classes_end_date)->format('Y-m-d') : '') }}"
                                            class="w-full border rounded px-3 py-2 @error('classes_end_date') border-red-500 @enderror">
                                     @error('classes_end_date')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                                 </div>
@@ -114,14 +115,14 @@
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
                                     <label for="midterm_start_date" class="block text-sm font-medium text-gray-700 mb-2">Midterm Start</label>
-                                    <input type="date" name="midterm_start_date" id="midterm_start_date" value="{{ old('midterm_start_date', $academicYear->midterm_start_date?->format('Y-m-d')) }}"
+                                    <input type="date" name="midterm_start_date" id="midterm_start_date" value="{{ old('midterm_start_date', $academicYear->midterm_start_date ? \Carbon\Carbon::parse($academicYear->midterm_start_date)->format('Y-m-d') : '') }}"
                                            class="w-full border rounded px-3 py-2 @error('midterm_start_date') border-red-500 @enderror">
                                     @error('midterm_start_date')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                                 </div>
 
                                 <div>
                                     <label for="midterm_end_date" class="block text-sm font-medium text-gray-700 mb-2">Midterm End</label>
-                                    <input type="date" name="midterm_end_date" id="midterm_end_date" value="{{ old('midterm_end_date', $academicYear->midterm_end_date?->format('Y-m-d')) }}"
+                                    <input type="date" name="midterm_end_date" id="midterm_end_date" value="{{ old('midterm_end_date', $academicYear->midterm_end_date ? \Carbon\Carbon::parse($academicYear->midterm_end_date)->format('Y-m-d') : '') }}"
                                            class="w-full border rounded px-3 py-2 @error('midterm_end_date') border-red-500 @enderror">
                                     @error('midterm_end_date')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                                 </div>
@@ -134,14 +135,14 @@
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
                                     <label for="exam_start_date" class="block text-sm font-medium text-gray-700 mb-2">Exam Start</label>
-                                    <input type="date" name="exam_start_date" id="exam_start_date" value="{{ old('exam_start_date', $academicYear->exam_start_date?->format('Y-m-d')) }}"
+                                    <input type="date" name="exam_start_date" id="exam_start_date" value="{{ old('exam_start_date', $academicYear->exam_start_date ? \Carbon\Carbon::parse($academicYear->exam_start_date)->format('Y-m-d') : '') }}"
                                            class="w-full border rounded px-3 py-2 @error('exam_start_date') border-red-500 @enderror">
                                     @error('exam_start_date')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                                 </div>
 
                                 <div>
                                     <label for="exam_end_date" class="block text-sm font-medium text-gray-700 mb-2">Exam End</label>
-                                    <input type="date" name="exam_end_date" id="exam_end_date" value="{{ old('exam_end_date', $academicYear->exam_end_date?->format('Y-m-d')) }}"
+                                    <input type="date" name="exam_end_date" id="exam_end_date" value="{{ old('exam_end_date', $academicYear->exam_end_date ? \Carbon\Carbon::parse($academicYear->exam_end_date)->format('Y-m-d') : '') }}"
                                            class="w-full border rounded px-3 py-2 @error('exam_end_date') border-red-500 @enderror">
                                     @error('exam_end_date')<p class="text-red-500 text-xs mt-1">{{ $message }}</p>@enderror
                                 </div>

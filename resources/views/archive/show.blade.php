@@ -1,4 +1,5 @@
 <x-app-layout>
+    <x-slot name="title">Archived Students</x-slot>
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <div>
@@ -59,30 +60,30 @@
                                 <tbody class="bg-white divide-y divide-gray-200">
                                     @foreach($archivedStudents as $archived)
                                         @php
-                                            $student = json_decode($archived->student_data);
+                                            $student = (object) $archived->student_data;
                                         @endphp
                                         <tr class="hover:bg-gray-50 transition-colors duration-150">
                                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                {{ $student->student_id }}
+                                                {{ $student->student_id ?? 'N/A' }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap">
                                                 <div class="flex items-center">
-                                                    @if($student->photo_path)
+                                                    @if(isset($student->photo_path) && $student->photo_path)
                                                         <img src="{{ asset('storage/' . $student->photo_path) }}" 
-                                                             alt="{{ $student->first_name }}"
+                                                             alt="{{ $student->first_name ?? '' }}"
                                                              class="w-10 h-10 rounded-full object-cover mr-3">
                                                     @else
                                                         <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center mr-3">
                                                             <span class="text-white font-semibold text-sm">
-                                                                {{ substr($student->first_name, 0, 1) }}{{ substr($student->last_name, 0, 1) }}
+                                                                {{ substr($student->first_name ?? 'N', 0, 1) }}{{ substr($student->last_name ?? 'A', 0, 1) }}
                                                             </span>
                                                         </div>
                                                     @endif
                                                     <div>
                                                         <div class="text-sm font-medium text-gray-900">
-                                                            {{ $student->first_name }} {{ $student->middle_name }} {{ $student->last_name }}
+                                                            {{ $student->first_name ?? '' }} {{ $student->middle_name ?? '' }} {{ $student->last_name ?? '' }}
                                                         </div>
-                                                        <div class="text-sm text-gray-500">{{ $student->email }}</div>
+                                                        <div class="text-sm text-gray-500">{{ $student->email ?? $student->email_address ?? 'N/A' }}</div>
                                                     </div>
                                                 </div>
                                             </td>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Student;
 use App\Models\Program;
+use App\Models\Department;
 use App\Models\AcademicYear;
 use App\Models\Activity;
 use Illuminate\Http\Request;
@@ -19,10 +20,11 @@ class StudentController extends Controller
     public function index(Request $request)
     {
         // Load all students for client-side filtering
-        $students = Student::with('program')->latest()->get();
+        $students = Student::with('program.department')->latest()->get();
         $programs = Program::where('is_active', true)->get();
+        $departments = Department::where('is_active', true)->orderBy('name')->get();
 
-        return view('students.index', compact('students', 'programs'));
+        return view('students.index', compact('students', 'programs', 'departments'));
     }
 
     /**
@@ -62,6 +64,7 @@ class StudentController extends Controller
             'address' => 'nullable',
             'mother_name' => 'nullable|max:255',
             'mother_contact_number' => 'nullable|max:20',
+            'father_name' => 'nullable|max:255',
             'father_contact_number' => 'nullable|max:20',
             'emergency_contact_person' => 'nullable|max:255',
             'emergency_contact_relationship' => 'nullable|max:255',
@@ -168,6 +171,7 @@ class StudentController extends Controller
             'address' => 'nullable',
             'mother_name' => 'nullable|max:255',
             'mother_contact_number' => 'nullable|max:20',
+            'father_name' => 'nullable|max:255',
             'father_contact_number' => 'nullable|max:20',
             'emergency_contact_person' => 'nullable|max:255',
             'emergency_contact_relationship' => 'nullable|max:255',
@@ -235,19 +239,32 @@ class StudentController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Mark student as dropped/withdrawn.
      */
     public function destroy(Student $student)
     {
-        // Delete photo if exists
-        if ($student->photo_path) {
-            Storage::disk('public')->delete($student->photo_path);
-        }
+        // Store original status
+        $originalStatus = $student->status;
+        
+        // Update status to Dropped
+        $student->update(['status' => 'Dropped']);
 
-        $student->delete();
+        // Log the status change
+        Activity::create([
+            'user_id' => Auth::id(),
+            'subject_type' => 'App\\Models\\Student',
+            'subject_id' => $student->id,
+            'action' => 'status_changed',
+            'description' => "Student {$student->first_name} {$student->last_name} marked as Dropped",
+            'properties' => [
+                'student_id' => $student->student_id,
+                'old_status' => $originalStatus,
+                'new_status' => 'Dropped',
+            ],
+        ]);
 
         return redirect()->route('students.index')
-            ->with('success', 'Student deleted successfully!');
+            ->with('success', 'Student marked as Dropped successfully!');
     }
 
     /**

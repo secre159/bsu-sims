@@ -38,7 +38,7 @@ class UserController extends Controller
 
         $users = $query->orderBy('name')->get();
         $departments = Department::orderBy('name')->get();
-        $roles = ['admin', 'chairperson', 'approver', 'user'];
+        $roles = ['admin', 'chairperson'];
 
         return view('users.index', compact('users', 'departments', 'roles'));
     }
@@ -49,7 +49,7 @@ class UserController extends Controller
     public function create()
     {
         $departments = Department::orderBy('name')->get();
-        $roles = ['admin', 'chairperson', 'approver', 'user'];
+        $roles = ['admin', 'chairperson'];
 
         return view('users.create', compact('departments', 'roles'));
     }
@@ -63,7 +63,7 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required', 'string', 'in:admin,chairperson,approver,user'],
+            'role' => ['required', 'string', 'in:admin,chairperson'],
             'department_id' => ['nullable', 'exists:departments,id'],
         ]);
 
@@ -89,7 +89,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $departments = Department::orderBy('name')->get();
-        $roles = ['admin', 'chairperson', 'approver', 'user'];
+        $roles = ['admin', 'chairperson'];
 
         return view('users.edit', compact('user', 'departments', 'roles'));
     }
@@ -103,7 +103,7 @@ class UserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,' . $user->id],
             'password' => ['nullable', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required', 'string', 'in:admin,chairperson,approver,user'],
+            'role' => ['required', 'string', 'in:admin,chairperson'],
             'department_id' => ['nullable', 'exists:departments,id'],
         ]);
 

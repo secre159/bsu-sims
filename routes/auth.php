@@ -13,17 +13,30 @@ use App\Http\Controllers\UnifiedLoginController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
+    // Generic login route that redirects to landing page
+    Route::get('login', function () {
+        return redirect('/');
+    })->name('login');
+    
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
 
     Route::post('register', [RegisteredUserController::class, 'store']);
 
-    Route::get('login', [AuthenticatedSessionController::class, 'create'])
-        ->name('login');
+    // Separate admin and student login routes
+    Route::get('admin/login', [AuthenticatedSessionController::class, 'create'])
+        ->name('admin.login');
+    
+    Route::get('student/login', [App\Http\Controllers\Student\StudentLoginController::class, 'showLoginForm'])
+        ->name('student.login');
 });
 
-// Login POST must be outside guest middleware to allow student login
-Route::post('login', [AuthenticatedSessionController::class, 'store']);
+// Login POST routes (outside guest middleware)
+Route::post('admin/login', [AuthenticatedSessionController::class, 'store'])
+    ->name('admin.login.post');
+
+Route::post('student/login', [App\Http\Controllers\Student\StudentLoginController::class, 'login'])
+    ->name('student.login.post');
 
 Route::middleware('guest')->group(function () {
 

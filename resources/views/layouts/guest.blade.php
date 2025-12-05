@@ -5,7 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ $title ?? 'Login' }} - {{ config('app.name', 'BSU-Bokod SIMS') }}</title>
+        
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="{{ asset('images/bsu-logo.png') }}">
+        <link rel="shortcut icon" type="image/png" href="{{ asset('images/bsu-logo.png') }}">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

@@ -28,7 +28,9 @@ return new class extends Migration
             $table->enum('status', ['Active', 'Graduated', 'Dropped', 'On Leave', 'Transferred'])->default('Active');
             $table->string('photo_path')->nullable();
             $table->date('enrollment_date')->nullable();
-            $table->foreignId('academic_year_id')->nullable()->constrained()->onDelete('set null');
+            // Store academic_year_id without a DB-level foreign key here.
+            // The related AcademicYear table is created in a later migration.
+            $table->unsignedBigInteger('academic_year_id')->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();

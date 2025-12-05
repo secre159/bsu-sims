@@ -17,70 +17,99 @@ class StudentDashboardController extends Controller
 
         // Get current enrollments
         $currentEnrollments = $student->enrollments()
-            ->with('subject')
+            ->with(['subject', 'academicYear'])
             ->whereIn('status', ['Enrolled', 'Completed'])
             ->when($currentYear, function ($query) use ($currentYear) {
                 return $query->where('academic_year_id', $currentYear->id);
             })
             ->get();
 
+        // Get all enrollments grouped by academic year
+        $allEnrollments = $student->enrollments()
+            ->with(['subject', 'academicYear'])
+            ->whereIn('status', ['Enrolled', 'Completed', 'Failed'])
+            ->orderBy('academic_year_id', 'desc')
+            ->get();
+
+        // Group by semester
+        $enrollmentsBySemester = $allEnrollments->groupBy(function ($enrollment) {
+            if ($enrollment->academicYear) {
+                return $enrollment->academicYear->year_code . ' - ' . $enrollment->academicYear->semester;
+            }
+            return 'No Academic Year';
+        });
+
         // Get all completed enrollments
         $completedCourses = $student->enrollments()
+            ->with('subject')
             ->where('status', 'Completed')
             ->get();
 
-        // Calculate GPA
-        $gpa = $this->calculateGPA($completedCourses);
+        // Use calculated GWA from database (maintained by GwaCalculationService)
+        $overallGwa = $student->gwa;
+
+        // Calculate current semester GWA
+        $currentSemesterEnrollments = $currentEnrollments->where('status', 'Completed');
+        $currentSemesterGwa = $this->calculateGWA($currentSemesterEnrollments);
 
         // Get quick stats
-        $totalUnits = $currentEnrollments->sum('subject.units');
+        $totalUnits = $currentEnrollments->sum(function($enrollment) {
+            return $enrollment->subject->units ?? 0;
+        });
         $enrollmentCount = $currentEnrollments->count();
+        $completedUnits = $completedCourses->sum(function($enrollment) {
+            return $enrollment->subject->units ?? 0;
+        });
+        $enrollmentsWithGrades = $currentEnrollments->whereNotNull('grade')->count();
+        $enrollmentsWithoutGrades = $currentEnrollments->whereNull('grade')->count();
+
+        // Grade statistics
+        $gradeStats = [
+            'excellent' => $completedCourses->filter(fn($e) => $e->grade && $e->grade <= 1.75)->count(),
+            'good' => $completedCourses->filter(fn($e) => $e->grade && $e->grade > 1.75 && $e->grade <= 2.5)->count(),
+            'fair' => $completedCourses->filter(fn($e) => $e->grade && $e->grade > 2.5 && $e->grade < 4.0)->count(),
+            'failed' => $completedCourses->filter(fn($e) => $e->grade && $e->grade >= 4.0)->count(),
+        ];
 
         return view('student.dashboard', compact(
             'student',
             'currentEnrollments',
             'completedCourses',
-            'gpa',
+            'enrollmentsBySemester',
+            'overallGwa',
+            'currentSemesterGwa',
             'totalUnits',
-            'enrollmentCount'
+            'completedUnits',
+            'enrollmentCount',
+            'enrollmentsWithGrades',
+            'enrollmentsWithoutGrades',
+            'gradeStats',
+            'currentYear'
         ));
     }
 
-    private function calculateGPA($enrollments)
+    private function calculateGWA($enrollments)
     {
         if ($enrollments->isEmpty()) {
-            return 0.0;
+            return null;
         }
 
-        $gradePoints = [
-            '1.0' => 4.0,
-            '1.25' => 3.75,
-            '1.5' => 3.5,
-            '1.75' => 3.25,
-            '2.0' => 3.0,
-            '2.25' => 2.75,
-            '2.5' => 2.5,
-            '2.75' => 2.25,
-            '3.0' => 2.0,
-            '4.0' => 0.0,
-        ];
-
-        $totalPoints = 0;
+        $totalWeightedGrade = 0;
         $totalUnits = 0;
 
         foreach ($enrollments as $enrollment) {
-            if ($enrollment->grade && isset($gradePoints[$enrollment->grade])) {
-                $points = $gradePoints[$enrollment->grade];
+            if ($enrollment->grade && is_numeric($enrollment->grade) && $enrollment->subject) {
                 $units = $enrollment->subject->units ?? 0;
-                $totalPoints += $points * $units;
+                $totalWeightedGrade += $enrollment->grade * $units;
                 $totalUnits += $units;
             }
         }
 
         if ($totalUnits == 0) {
-            return 0.0;
+            return null;
         }
 
-        return round($totalPoints / $totalUnits, 2);
+        return round($totalWeightedGrade / $totalUnits, 2);
     }
+
 }

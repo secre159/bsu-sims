@@ -13,11 +13,11 @@
                 <div class="p-6 text-gray-900">
                     <!-- Student and Enrollment Information -->
                     <div class="mb-8 grid grid-cols-2 gap-6">
-                        <div class="border-l-4 border-brand-deep pl-4">
+                        <div class="border-l-4 border-emerald-700 pl-4">
                             <p class="text-xs text-gray-500 uppercase tracking-wide">Student ID</p>
                             <p class="text-lg font-semibold text-gray-800">{{ $enrollment->student->student_id }}</p>
                         </div>
-                        <div class="border-l-4 border-brand-medium pl-4">
+                        <div class="border-l-4 border-emerald-600 pl-4">
                             <p class="text-xs text-gray-500 uppercase tracking-wide">Student Name</p>
                             <p class="text-lg font-semibold text-gray-800">
                                 {{ $enrollment->student->last_name }}, {{ $enrollment->student->first_name }}
@@ -31,7 +31,13 @@
                         </div>
                         <div class="border-l-4 border-blue-600 pl-4">
                             <p class="text-xs text-gray-500 uppercase tracking-wide">Academic Year</p>
-                            <p class="text-lg font-semibold text-gray-800">{{ $enrollment->academicYear->year_code }} ({{ $enrollment->academicYear->semester }})</p>
+                            <p class="text-lg font-semibold text-gray-800">
+                                @if($enrollment->academicYear)
+                                    {{ $enrollment->academicYear->year_code }} ({{ $enrollment->academicYear->semester }})
+                                @else
+                                    <span class="text-gray-400">Not Set</span>
+                                @endif
+                            </p>
                         </div>
                     </div>
 
@@ -66,7 +72,7 @@
                                 <select id="grade" 
                                         name="grade"
                                         class="block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm 
-                                               focus:ring-brand-medium focus:border-brand-medium @error('grade') border-red-500 @enderror">
+                                               focus:ring-emerald-500 focus:border-emerald-500 @error('grade') border-red-500 @enderror">
                                     <option value="">-- Select Grade --</option>
                                     <optgroup label="Passing Grades">
                                         <option value="1.00" {{ old('grade', $enrollment->grade) == '1.00' ? 'selected' : '' }}>1.00 - Excellent (96-100)</option>
@@ -103,7 +109,7 @@
                                       name="remarks" 
                                       rows="3"
                                       class="block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm 
-                                             focus:ring-brand-medium focus:border-brand-medium @error('remarks') border-red-500 @enderror"
+                                             focus:ring-emerald-500 focus:border-emerald-500 @error('remarks') border-red-500 @enderror"
                                       placeholder="Add any comments or notes about this grade">{{ old('remarks', $enrollment->remarks) }}</textarea>
                             @error('remarks')
                                 <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -118,7 +124,7 @@
                             <select id="reason" 
                                     name="reason"
                                     class="block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm 
-                                           focus:ring-brand-medium focus:border-brand-medium @error('reason') border-red-500 @enderror">
+                                           focus:ring-emerald-500 focus:border-emerald-500 @error('reason') border-red-500 @enderror">
                                 <option value="">-- Select a reason --</option>
                                 <option value="Initial Entry" {{ old('reason') == 'Initial Entry' ? 'selected' : '' }}>Initial Grade Entry</option>
                                 <option value="Correction" {{ old('reason') == 'Correction' ? 'selected' : '' }}>Grade Correction</option>
@@ -163,7 +169,7 @@
                                     Cancel
                                 </a>
                                 <button type="submit" 
-                                        class="px-6 py-2 bg-gradient-to-r from-brand-deep to-brand-medium hover:from-brand-medium hover:to-brand-light text-white rounded-lg font-medium">
+                                        class="px-6 py-2 bg-gradient-to-r from-emerald-700 to-emerald-600 hover:from-emerald-600 hover:to-emerald-500 text-white rounded-lg font-medium">
                                     Save Grade
                                 </button>
                             </div>

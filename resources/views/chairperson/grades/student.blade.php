@@ -32,13 +32,17 @@
                 </div>
             @endif
 
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            @foreach($enrollmentsBySemester as $semesterLabel => $semesterEnrollments)
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mb-6">
                 <div class="p-6 text-gray-900">
-                    <h3 class="text-lg font-semibold mb-4">Enrolled Subjects & Grades</h3>
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold">{{ $semesterLabel }}</h3>
+                        <span class="text-sm text-gray-600">{{ $semesterEnrollments->count() }} {{ Str::plural('subject', $semesterEnrollments->count()) }}</span>
+                    </div>
                     
                     <div class="overflow-x-auto">
                         <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gradient-to-r from-brand-deep to-brand-medium text-white">
+                            <thead class="bg-gradient-to-r from-emerald-700 to-emerald-600 text-white">
                                 <tr>
                                     <th class="px-6 py-3 text-left text-xs font-bold uppercase">Subject Code</th>
                                     <th class="px-6 py-3 text-left text-xs font-bold uppercase">Subject Name</th>
@@ -49,7 +53,7 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
-                                @foreach($enrollments as $enrollment)
+                                @foreach($semesterEnrollments as $enrollment)
                                     <tr class="hover:bg-gray-50">
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             {{ $enrollment->subject->code }}
@@ -63,7 +67,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-center">
                                             @if($enrollment->grade !== null)
                                                 @if(is_numeric($enrollment->grade))
-                                                    <span class="text-lg font-bold text-brand-deep">{{ number_format($enrollment->grade, 2) }}</span>
+                                                    <span class="text-lg font-bold text-emerald-700">{{ number_format($enrollment->grade, 2) }}</span>
                                                 @else
                                                     <span class="text-lg font-bold text-orange-600">{{ $enrollment->grade }}</span>
                                                 @endif
@@ -82,7 +86,7 @@
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm space-x-2">
                                             <a href="{{ route('chairperson.grades.edit', $enrollment) }}" 
-                                               class="text-brand-deep hover:text-brand-medium font-medium">
+                                               class="text-emerald-700 hover:text-emerald-600 font-medium">
                                                 {{ $enrollment->grade !== null ? 'Edit' : 'Enter Grade' }}
                                             </a>
                                             @if($enrollment->gradeHistories()->count() > 0)
@@ -97,12 +101,15 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+            </div>
+            @endforeach
 
                     <!-- Summary -->
                     <div class="mt-6 p-4 bg-gray-50 rounded-lg">
                         <div class="grid grid-cols-3 gap-4 text-center">
                             <div>
-                                <div class="text-2xl font-bold text-brand-deep">{{ $enrollments->count() }}</div>
+                                <div class="text-2xl font-bold text-emerald-700">{{ $enrollments->count() }}</div>
                                 <div class="text-sm text-gray-600">Total Subjects</div>
                             </div>
                             <div>

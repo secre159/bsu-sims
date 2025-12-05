@@ -16,7 +16,7 @@ class SubjectController extends Controller
      */
     public function index(Request $request)
     {
-        // Load departments with their programs and subjects
+        // Load departments with their programs and subjects (only active in hierarchy)
         $departments = Department::where('is_active', true)
             ->with(['programs' => function($query) {
                 $query->where('is_active', true)->with('subjects')->orderBy('name');
@@ -30,7 +30,7 @@ class SubjectController extends Controller
                 return $dept;
             });
 
-        // Keep flat list for backward compatibility/filtering
+        // Keep flat list with ALL subjects (active and archived) for stats and modal
         $subjects = Subject::with('program', 'department')->latest()->get();
         $programs = Program::where('is_active', true)->get();
 
@@ -171,26 +171,31 @@ class SubjectController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Toggle archive status (soft archive/restore).
      */
     public function destroy(Subject $subject)
     {
-        // Log deletion
+        // Toggle is_active status
+        $newStatus = !$subject->is_active;
+        $action = $newStatus ? 'restored' : 'archived';
+        
+        $subject->update(['is_active' => $newStatus]);
+
+        // Log archive/restore action
         Activity::create([
             'user_id' => Auth::id(),
             'subject_type' => 'App\\Models\\Subject',
             'subject_id' => $subject->id,
-            'action' => 'deleted',
-            'description' => "Subject {$subject->code} - {$subject->name} deleted",
+            'action' => $action,
+            'description' => "Subject {$subject->code} - {$subject->name} {$action}",
             'properties' => [
                 'code' => $subject->code,
                 'program_id' => $subject->program_id,
+                'is_active' => $newStatus,
             ],
         ]);
 
-        $subject->delete();
-
         return redirect()->route('subjects.index')
-            ->with('success', 'Subject deleted successfully!');
+            ->with('success', 'Subject ' . $action . ' successfully!');
     }
 }

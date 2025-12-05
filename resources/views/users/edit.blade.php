@@ -1,4 +1,5 @@
 <x-app-layout>
+    <x-slot name="title">Edit User</x-slot>
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -75,9 +76,7 @@
                             </select>
                             <p class="mt-1 text-sm text-gray-500">
                                 <strong>Admin:</strong> Full system access |
-                                <strong>Chairperson:</strong> Grade management for assigned department |
-                                <strong>Approver:</strong> Approve grades |
-                                <strong>User:</strong> Basic access
+                                <strong>Chairperson:</strong> Grade management for assigned department
                             </p>
                         </div>
 
@@ -104,7 +103,7 @@
                             <a href="{{ route('users.index') }}" class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded">
                                 Cancel
                             </a>
-                            <button type="submit" class="bg-brand-medium hover:bg-brand-deep text-white px-4 py-2 rounded">
+                            <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded">
                                 Update User
                             </button>
                         </div>

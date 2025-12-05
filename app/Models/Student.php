@@ -18,11 +18,11 @@ class Student extends Model
         'student_id', 'last_name', 'first_name', 'middle_name', 'suffix', 'maiden_name',
         'birthdate', 'date_of_birth', 'place_of_birth', 'gender', 'citizenship', 'ethnicity_tribal_affiliation',
         'contact_number', 'email', 'email_address', 'address', 'home_address', 'address_while_studying',
-        'mother_name', 'mother_contact_number', 'father_contact_number',
+        'mother_name', 'mother_contact_number', 'father_name', 'father_contact_number',
         'emergency_contact_person', 'emergency_contact_relationship', 'emergency_contact_number',
         'program_id', 'year_level', 'status', 'photo_path', 'enrollment_date', 'academic_year_id',
         'student_type', 'degree', 'major', 'section', 'attendance_type', 'curriculum_used',
-        'total_units_enrolled', 'free_higher_education_benefit', 'notes', 'gpa', 'academic_standing'
+        'total_units_enrolled', 'free_higher_education_benefit', 'notes', 'gwa', 'gpa', 'academic_standing', 'is_irregular'
     ];
 
     protected $casts = [

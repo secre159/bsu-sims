@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('subjects', function (Blueprint $table) {
-            $table->foreignId('department_id')->nullable()->after('name')->constrained('departments')->onDelete('set null');
+            // Add nullable department_id without a DB-level foreign key; departments table
+            // is created in a later migration.
+            $table->unsignedBigInteger('department_id')->nullable()->after('name');
         });
     }
 
@@ -22,7 +24,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('subjects', function (Blueprint $table) {
-            $table->dropForeignIdFor('Department');
             $table->dropColumn('department_id');
         });
     }

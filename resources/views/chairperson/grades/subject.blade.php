@@ -59,7 +59,7 @@
 
                         <div class="overflow-x-auto">
                             <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gradient-to-r from-brand-deep to-brand-medium text-white">
+                                <thead class="bg-gradient-to-r from-emerald-700 to-emerald-600 text-white">
                                     <tr>
                                         <th class="px-6 py-3 text-left text-xs font-bold uppercase">Student ID</th>
                                         <th class="px-6 py-3 text-left text-xs font-bold uppercase">Student Name</th>
@@ -84,7 +84,7 @@
                                             <td class="px-6 py-4 whitespace-nowrap text-center">
                                                 @if($enrollment->grade !== null)
                                                     @if(is_numeric($enrollment->grade))
-                                                        <span class="font-semibold text-brand-deep">{{ number_format($enrollment->grade, 2) }}</span>
+                                                        <span class="font-semibold text-emerald-700">{{ number_format($enrollment->grade, 2) }}</span>
                                                     @else
                                                         <span class="font-semibold text-orange-600">{{ $enrollment->grade }}</span>
                                                     @endif
@@ -94,7 +94,7 @@
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-center">
                                                 <select name="grades[{{ $index }}][grade]"
-                                                        class="w-24 text-center border-gray-300 rounded-md shadow-sm focus:ring-brand-medium focus:border-brand-medium">
+                                                        class="w-24 text-center border-gray-300 rounded-md shadow-sm focus:ring-emerald-500 focus:border-emerald-500">
                                                     <option value="">--</option>
                                                     <option value="1.00" {{ old("grades.{$index}.grade", $enrollment->grade) == '1.00' ? 'selected' : '' }}>1.00</option>
                                                     <option value="1.25" {{ old("grades.{$index}.grade", $enrollment->grade) == '1.25' ? 'selected' : '' }}>1.25</option>
@@ -126,7 +126,7 @@
                                    id="reason" 
                                    value="{{ old('reason', 'End of semester grade entry') }}"
                                    required
-                                   class="w-full border-gray-300 rounded-md shadow-sm focus:ring-brand-medium focus:border-brand-medium"
+                                   class="w-full border-gray-300 rounded-md shadow-sm focus:ring-emerald-500 focus:border-emerald-500"
                                    placeholder="e.g., End of semester grade entry, Final exam results">
                             <p class="mt-1 text-xs text-gray-500">This will be recorded in the grade history for audit purposes.</p>
                         </div>
@@ -138,7 +138,7 @@
                                 Cancel
                             </a>
                             <button type="submit" 
-                                    class="bg-brand-medium hover:bg-brand-deep text-white px-6 py-2 rounded font-medium transition">
+                                    class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded font-medium transition">
                                 Save All Grades
                             </button>
                         </div>
@@ -148,7 +148,7 @@
                     <div class="mt-6 pt-6 border-t border-gray-200">
                         <div class="grid grid-cols-3 gap-4 text-center">
                             <div>
-                                <div class="text-2xl font-bold text-brand-deep">{{ $enrollments->count() }}</div>
+                                <div class="text-2xl font-bold text-emerald-700">{{ $enrollments->count() }}</div>
                                 <div class="text-sm text-gray-600">Total Students</div>
                             </div>
                             <div>

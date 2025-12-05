@@ -12,11 +12,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Change status from enum to string to allow more flexibility
-        DB::statement('ALTER TABLE grade_import_batches RENAME COLUMN status TO status_old');
-        DB::statement('ALTER TABLE grade_import_batches ADD COLUMN status VARCHAR(255) DEFAULT "pending"');
-        DB::statement('UPDATE grade_import_batches SET status = status_old');
-        DB::statement('ALTER TABLE grade_import_batches DROP COLUMN status_old');
+        // Change status from enum to string to allow more flexibility.
+        // On fresh installs this table is empty, so we can safely drop the
+        // enum column and recreate it as a VARCHAR without data migration.
+        Schema::table('grade_import_batches', function (Blueprint $table) {
+            $table->dropColumn('status');
+        });
+
+        Schema::table('grade_import_batches', function (Blueprint $table) {
+            $table->string('status')->default('pending');
+        });
     }
 
     /**
