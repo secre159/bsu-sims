@@ -35,8 +35,10 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction --ignore-pl
 # Install Node dependencies and build assets
 RUN npm ci && npm run build
 
-# Set permissions
-RUN chown -R www-data:www-data /app/storage /app/bootstrap/cache
+# Ensure public/build directory exists and has correct permissions
+RUN mkdir -p /app/public/build && \
+    chmod -R 755 /app/public && \
+    chown -R www-data:www-data /app/storage /app/bootstrap/cache /app/public
 
 # Expose port
 EXPOSE 8080
